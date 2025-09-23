@@ -31,7 +31,7 @@ export default function AdminLayout({
             className="cursor-pointer"
           />
         </div>
-        <hr className="mt-4" style={{ borderColor: "#2e77b3" }} />
+        <hr className="mt-4 border-[#2e77b3]" />
         <ul className="nav-list">
           <li>
             <Link
@@ -49,7 +49,7 @@ export default function AdminLayout({
               href="/admin/member"
               className={pathname === "/admin/member" ? "active" : ""}
             >
-              <div className="lucide px-2 active:bg-gradient-to-r active:from-[#c2e0f9] active:to-[#2e77b3] active:bg-clip-text active:text-transparent">
+              <div className="lucide px-2 active:bg-gradient-to-r active:from-[#c2e0f9] active:to-[#8ca5ba] active:bg-clip-text active:text-transparent">
                 <Users />
               </div>
               <span className="links_name">จัดการรถยนต์</span>
@@ -102,8 +102,10 @@ export default function AdminLayout({
         </ul>
       </div>
       <div className="app-main bg-aim-background flex flex-col">
-        <div className=" shadow-md bg-aim-navbar-top w-full py-5">
-          Admin Dashboard
+        <div className="shadow-md bg-aim-navbar-top w-full p-4 pb-0">
+          {/* TODO: Headers ต้องลิ้งกันกับ แต่ละ pages (path) */}
+          <h2 className="text-aim-secondary font-bold"> แดชบอร์ด </h2>
+          <p className="text-slate-500"> {pathname} </p>
         </div>
         <div>{children}</div>
       </div>

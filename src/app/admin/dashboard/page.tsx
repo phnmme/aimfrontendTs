@@ -1,9 +1,23 @@
+import CardActivities from "./_components/card-activities";
+import CardExpirations from "./_components/card-expirations";
+import CardSummarized from "./_components/card-summarized";
+
+
 export default function DashboardPage() {
   return (
-    <>
-      {/* <div className=" shadow-md bg-aim-navbar-top w-full py-5">
-        Admin Dashboard
-      </div> */}
-    </>
+    <main>
+      <div className=" shadow-md bg-aim-navbar-top w-full p-5">
+        <div>
+          <h1 className="font-extrabold bg-gradient-to-r from-[#c2e0f9] to-[#2e77b3] bg-clip-text text-transparent">ยินดีต้อนรับสู่หน้าแดชบอร์ด</h1>
+          <p className="text-slate-500"> ภาพรวมของ AIM-L</p>
+        </div>
+        
+        <CardSummarized />
+        <div className="flex justify-between gap-8">
+          <CardActivities />
+          <CardExpirations />
+        </div>
+      </div>
+    </main>
   );
 }
