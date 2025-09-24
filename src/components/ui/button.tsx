@@ -19,6 +19,8 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
+        gradientBorder:
+          "w-fit p-2 bg-red-500"
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
@@ -46,7 +48,23 @@ function Button({
   }) {
   const Comp = asChild ? Slot : "button"
 
-  return (
+  return variant === "gradientBorder" ? (
+    <div className={cn("w-full relative group")}>
+      <div
+        className={cn(
+          "absolute inset-0 rounded-sm z-[1] opacity-70 group-hover:opacity-100 blur-xs transition duration-500 will-change-transform",
+          "bg-[radial-gradient(circle_farthest-side_at_0_100%,#06B6D4,transparent),radial-gradient(circle_farthest-side_at_0_0,#06B6D4,#3B82F6)]"
+        )}
+      />
+      <div className={cn("relative z-10", className)}>
+        <Comp
+          data-slot="button"
+          className={cn(buttonVariants({ variant, size, className }), "rounded-sm bg-card")}
+          {...props}
+        />
+      </div>
+    </div>
+  ) : (
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
