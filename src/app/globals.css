@@ -333,3 +333,14 @@ p {
   width: calc(100% - 250px);
 }
 
+/* globals.css */
+@keyframes borderMove {
+  to { background-position: 200% 0; }
+}
+
+@layer utilities {
+  .animate-gradient {
+    animation: borderMove 6s linear infinite;
+    background-size: 200% 100%;
+  }
+}
