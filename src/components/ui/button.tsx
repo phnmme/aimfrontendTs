@@ -52,7 +52,7 @@ function Button({
     <div className={cn("w-full relative group")}>
       <div
         className={cn(
-          "absolute inset-0 rounded-sm z-[1] opacity-70 group-hover:opacity-100 blur-xs transition duration-500 will-change-transform",
+          "absolute inset-0 rounded-sm z-[1] opacity-50 group-hover:opacity-100 blur-xs transition duration-500 will-change-transform",
           "bg-[radial-gradient(circle_farthest-side_at_0_100%,#06B6D4,transparent),radial-gradient(circle_farthest-side_at_0_0,#06B6D4,#3B82F6)]"
         )}
       />

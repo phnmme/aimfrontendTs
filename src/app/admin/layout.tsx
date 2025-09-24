@@ -55,10 +55,10 @@ export default function AdminLayout({
           </li>
           <li>
             <Link
-              href="/admin/vechicle"
-              className={pathname === "/admin/vechicle" ? "active" : ""}
+              href="/admin/vehicle"
+              className={pathname === "/admin/vehicle" ? "active" : ""}
             >
-              <div className="lucide px-2 active:bg-gradient-to-r active:from-[#c2e0f9] active:to-[#8ca5ba] active:bg-clip-text active:text-transparent">
+              <div className="lucide px-2 ">
                 <Users />
               </div>
               <span className="links_name">จัดการรถยนต์</span>

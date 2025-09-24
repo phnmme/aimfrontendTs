@@ -13,7 +13,7 @@ export default function DashboardPage() {
         </div>
         
         <CardSummarized />
-        <div className="flex justify-between gap-8">
+        <div className="md:flex gap-8">
           <CardActivities />
           <CardExpirations />
         </div>

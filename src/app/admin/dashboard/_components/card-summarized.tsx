@@ -14,13 +14,13 @@ import {
 // HACK: Hard-Code แบบสุดๆ :/
 export default function CardSummarized() {
     return (
-        <div className="grid grid-cols-4 gap-10 my-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 my-6">
             <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-4">
-                <CardTitle className="text-sm font-medium">
+                <CardTitle className="text-md font-medium">
                     ลูกค้าทั้งหมด
                 </CardTitle>
-                <Users className="h-4 w-4" />
+                <Users className="h-5 w-5" />
             </CardHeader>
             <CardContent>
                 <div className="text-xl font-bold">
@@ -34,10 +34,10 @@ export default function CardSummarized() {
             
             <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-4">
-                <CardTitle className="text-sm font-medium">
+                <CardTitle className="text-md font-medium">
                     รถยนต์ทั้งหมด
                 </CardTitle>
-                <CarFront className="h-4 w-4" />
+                <CarFront className="h-5 w-5" />
             </CardHeader>
             <CardContent>
                 <div className="text-2xl font-bold">
@@ -50,10 +50,10 @@ export default function CardSummarized() {
             </Card>
             <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-4">
-                <CardTitle className="text-sm font-medium">
+                <CardTitle className="text-md font-medium">
                     ใกล้หมดอายุ
                 </CardTitle>
-                <TriangleAlert className="h-4 w-4" color="oklch(90.5% 0.182 98.111)" />
+                <TriangleAlert className="h-5 w-5" color="oklch(90.5% 0.182 98.111)" />
             </CardHeader>
             <CardContent className="text-yellow-300 flex flex-row justify-between items-center">
                 <div className="text-2xl font-bold">
@@ -66,10 +66,10 @@ export default function CardSummarized() {
             </Card>
             <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-4">
-                <CardTitle className="text-sm font-medium">
+                <CardTitle className="text-md font-medium">
                     รายได้เดือนนี้
                 </CardTitle>
-                <CircleDollarSign className="h-4 w-4" />
+                <CircleDollarSign className="h-5 w-5" />
             </CardHeader>
             <CardContent>
                 <div className="text-2xl font-bold">

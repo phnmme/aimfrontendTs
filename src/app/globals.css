@@ -90,7 +90,7 @@
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: rgba(46, 119, 179, 1);
+  --border: rgba(0, 61, 118, 1);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -124,7 +124,7 @@
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: rgba(46, 119, 179, 1);
+  --border: rgba(0, 61, 118, 1);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
   --chart-1: oklch(0.488 0.243 264.376);
@@ -160,7 +160,7 @@ h3 {
 }
 
 p {
-  font-size: clamp(16px, 2vw, 16px);
+  font-size: clamp(14px, 2vw, 14px);
 }
 
 .sidebar {
@@ -231,14 +231,15 @@ p {
 }
 .sidebar li {
   position: relative;
-  margin: 8px 0;
+  margin: 1.5rem 0;
   list-style: none;
 }
 .sidebar li a {
   display: flex;
   height: 100%;
   width: 100%;
-  border-radius: 6px;
+  padding: 4px;
+  border-radius: 12px;
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
@@ -247,19 +248,19 @@ p {
 .sidebar li a:hover {
   background: rgba(0, 34, 108, 0.5);
   border-radius: 6px;
-  box-shadow: 0 0 0 1px transparent, 0 0 0 1px #2e77b3 inset;
+  box-shadow: 0 0 0 2px transparent, 0 0 0 2px #2e77b3 inset;
 }
 .sidebar li a.active {
   background: rgba(0, 34, 108, 0.5);
   border-radius: 6px;
-  box-shadow: 0 0 0 1px transparent, 0 0 0 1px #2e77b3 inset;
+  box-shadow: 0 0 0 2px transparent, 0 0 0 2px #c3d0db inset;
 }
 .sidebar li a.active svg {
-  color: #337cdb;
+  color: #89b6db;
 }
 .sidebar li a.active .links_name {
   color: #fff;
-  @apply bg-gradient-to-r from-[#c2e0f9] to-[#2e77b3] bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-[#c2e0f9] to-[#89b6db] bg-clip-text text-transparent;
 }
 .sidebar li a .links_name {
   color: #fff;

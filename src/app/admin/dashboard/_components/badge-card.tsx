@@ -11,7 +11,7 @@ export type ExpireDayRange = {
 // TODO: Injectable
 export default function BadgeCard() {
     return (
-        <Badge variant="outline">
+        <Badge variant="warning">
             ทดสอบ
         </Badge>
     )

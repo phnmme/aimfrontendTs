@@ -52,10 +52,12 @@ export default function CardActivities() {
                                 className="flex justify-between space-y-2"
                             >
                                 <TableCell className="flex flex-col">
-                                        <h3>{activity.activity}</h3>
-                                        <p className="text-muted-foreground">{activity.name}</p>
+                                    <h3>{activity.activity}</h3>
+                                    <p className="text-muted-foreground">{activity.name}</p>
                                 </TableCell>
-                                <TableCell>{activity.time}</TableCell>
+                                <TableCell>
+                                    <p>{activity.time}</p>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
