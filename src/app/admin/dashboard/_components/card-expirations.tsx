@@ -13,7 +13,7 @@ interface Activity {
     vehicle_id: string;
     vehicle_type: string; // TODO: ควรจะเป็น Enumeration
     name: string;
-    expired_time: string;
+    expired_time: string;   
 }
 
 // MOCKUP
@@ -66,10 +66,11 @@ export default function CardExpirations() {
                 </Table>
             </CardContent>
             <CardFooter>
-                <Button className="w-full" variant="default">
-                    <Link href="/admin/dashboard" className="buttonn-default"></Link>ดูทั้งหมด
+                <Button className="w-full" variant="gradientBorder" size="default">
+                    <Link href="/admin/dashboard" className="buttonn-default"></Link>ดูเพิ่มเติม
                 </Button>
             </CardFooter>
+
         </Card>
     );
 }

@@ -53,7 +53,7 @@ export default function CardSummarized() {
                 <CardTitle className="text-sm font-medium">
                     ใกล้หมดอายุ
                 </CardTitle>
-                <TriangleAlert className="h-4 w-4" color="yellow" />
+                <TriangleAlert className="h-4 w-4" color="oklch(90.5% 0.182 98.111)" />
             </CardHeader>
             <CardContent className="text-yellow-300 flex flex-row justify-between items-center">
                 <div className="text-2xl font-bold">

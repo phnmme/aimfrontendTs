@@ -121,7 +121,7 @@ export default function AdminLayout({
         </ul>
       </div>
       <div className="app-main bg-aim-background flex flex-col">
-        <div className="shadow-md bg-aim-navbar-top w-full z-40 fixed p-4 pb-0">
+        <div className="shadow-md bg-aim-navbar-top w-full z-40 fixed p-4">
           {/* TODO: Headers ต้องลิ้งกันกับ แต่ละ pages (path) */}
           <h2 className="text-aim-secondary font-bold"> แดชบอร์ด </h2>
           <p className="text-slate-500"> {pathname} </p>
