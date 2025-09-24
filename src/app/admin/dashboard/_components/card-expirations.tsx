@@ -55,10 +55,17 @@ export default function CardExpirations() {
                                 key={index}
                                 className="flex justify-between space-y-2"
                             >
-                                <TableCell className="flex flex-col">
-                                    <div className="flex items-center space-x-2">
-                                        <h3>{`ยานพาหนะ: ${activity.vehicle_id}`}</h3>
-                                        <BadgeCard />
+                                <TableCell className="flex flex-col w-full">
+                                    <div className="flex justify-between">
+                                        <div className="flex items-center space-x-2">
+                                            <h3>{`ยานพาหนะ: ${activity.vehicle_id}`}</h3>
+                                            {/* Type */}
+                                            <BadgeCard /> 
+                                        </div>
+                                        <div className="flex items-center space-x-2">
+                                            {/* Date */}
+                                            <BadgeCard />
+                                        </div>
                                     </div>
                                     <p className="text-muted-foreground">{activity.name}</p>
                                     <p className="text-sm text-muted-foreground">{activity.expired_time}</p>
