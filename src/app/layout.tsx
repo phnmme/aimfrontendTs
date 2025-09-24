@@ -3,7 +3,7 @@ import { Prompt } from "next/font/google";
 
 const prompt = Prompt({
   subsets: ["thai"],
-  weight: ["400", "500", "700"],
+  weight: ["600"],
 });
 
 export default function RootLayout({

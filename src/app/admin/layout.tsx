@@ -4,7 +4,15 @@ import Link from "next/link";
 import "../globals.css";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Users, Shield, Package, History } from "lucide-react";
+import {
+  LayoutDashboard,
+  Users,
+  Shield,
+  Package,
+  History,
+  CircleUserRound,
+  LogOut,
+} from "lucide-react";
 import Image from "next/image";
 
 export default function AdminLayout({
@@ -39,15 +47,15 @@ export default function AdminLayout({
               className={pathname === "/admin/dashboard" ? "active" : ""}
             >
               <div className="icon px-2">
-                <LayoutDashboard color="#337cdb" />
+                <LayoutDashboard />
               </div>
               <span className="links_name">แดชบอร์ด</span>
             </Link>
           </li>
           <li>
             <Link
-              href="/admin/member"
-              className={pathname === "/admin/member" ? "active" : ""}
+              href="/admin/vechicle"
+              className={pathname === "/admin/vechicle" ? "active" : ""}
             >
               <div className="lucide px-2 active:bg-gradient-to-r active:from-[#c2e0f9] active:to-[#8ca5ba] active:bg-clip-text active:text-transparent">
                 <Users />
@@ -57,8 +65,8 @@ export default function AdminLayout({
           </li>
           <li>
             <Link
-              href="/admin/role"
-              className={pathname === "/admin/role" ? "active" : ""}
+              href="/admin/customer"
+              className={pathname === "/admin/customer" ? "active" : ""}
             >
               <div className="icon px-2">
                 <Shield />
@@ -68,8 +76,8 @@ export default function AdminLayout({
           </li>
           <li>
             <Link
-              href="/admin/stock"
-              className={pathname === "/admin/stock" ? "active" : ""}
+              href="/admin/analytics"
+              className={pathname === "/admin/analytics" ? "active" : ""}
             >
               <div className="icon px-2">
                 <Package />
@@ -79,8 +87,8 @@ export default function AdminLayout({
           </li>
           <li>
             <Link
-              href="/admin/history/order"
-              className={pathname === "/admin/history/order" ? "active" : ""}
+              href="/admin/configsite"
+              className={pathname === "/admin/configsite" ? "active" : ""}
             >
               <div className="icon px-2">
                 <History />
@@ -89,25 +97,36 @@ export default function AdminLayout({
             </Link>
           </li>
           <li className="profile">
-            <div className="profile-details">
-              <div className="name_job">
-                <div className="flex">
-                  <div className="self-end text-black text-[12px]">
-                    &copy; Copyright 2025 all rights reserved by tumgap
-                  </div>
-                </div>
+            <hr className="border-[#2e77b3] mb-2" />
+
+            <div className="flex">
+              <div className="bg-aim-secondary p-2 rounded-lg">
+                <CircleUserRound color="#ffffff" />
+              </div>
+              <div className="flex flex-col my-auto">
+                <p>
+                  <span className="links_name ml-3">Admin User</span>
+                </p>
+                <p>
+                  <span className="text-slate-500 ml-3 text-sm">
+                    ผู้ดูแลระบบ
+                  </span>
+                </p>
+              </div>
+              <div className="ml-auto my-auto hover:cursor-pointer hover:bg-[#0f172a] p-2 rounded-lg transition-all">
+                <LogOut color="#ffffff" />
               </div>
             </div>
           </li>
         </ul>
       </div>
       <div className="app-main bg-aim-background flex flex-col">
-        <div className="shadow-md bg-aim-navbar-top w-full p-4 pb-0">
+        <div className="shadow-md bg-aim-navbar-top w-full z-40 fixed p-4 pb-0">
           {/* TODO: Headers ต้องลิ้งกันกับ แต่ละ pages (path) */}
           <h2 className="text-aim-secondary font-bold"> แดชบอร์ด </h2>
           <p className="text-slate-500"> {pathname} </p>
         </div>
-        <div>{children}</div>
+        <div className="mt-20">{children}</div>
       </div>
     </div>
   );

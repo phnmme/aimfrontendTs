@@ -148,7 +148,7 @@ body {
 }
 
 h1 {
-  font-size: clamp(30px, 5vw, 30px); 
+  font-size: clamp(30px, 5vw, 30px);
 }
 
 h2 {
@@ -156,11 +156,11 @@ h2 {
 }
 
 h3 {
-  font-size: clamp(20px, 3vw, 20px); 
+  font-size: clamp(20px, 3vw, 20px);
 }
 
 p {
-  font-size: clamp(16px, 2vw, 16px); 
+  font-size: clamp(16px, 2vw, 16px);
 }
 
 .sidebar {
@@ -289,23 +289,18 @@ p {
 }
 .sidebar li.profile {
   position: fixed;
-  height: 60px;
+  height: 100px;
   width: 250px;
   left: 0;
   bottom: -8px;
-  padding: 10px 14px;
-  background: #fff;
+  padding: 20px 14px;
   transition: all 0.5s ease;
   overflow: hidden;
 }
 .sidebar.close li.profile {
   width: 78px;
 }
-.sidebar li .profile-details {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-}
+
 .sidebar li img {
   height: 45px;
   max-width: 100%;
@@ -313,17 +308,6 @@ p {
   border-radius: 6px;
   margin-right: 10px;
 }
-.sidebar li.profile .name,
-.sidebar li.profile .job {
-  font-size: 15px;
-  font-weight: 400;
-  color: #fff;
-  white-space: nowrap;
-}
-.sidebar li.profile .job {
-  font-size: 12px;
-}
-
 .app-main {
   position: relative;
   min-height: 100vh;
@@ -332,4 +316,3 @@ p {
   z-index: 0;
   width: calc(100% - 250px);
 }
-
