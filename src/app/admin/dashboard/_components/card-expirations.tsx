@@ -7,6 +7,7 @@ import { Table, TableBody, TableCell, TableRow, TableHeader } from "@/components
 import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import BadgeCard from "./badge-card";
 
 // TODO: ทำ interface ให้เหมาะกับข้อมูล
 interface Activity {
@@ -55,11 +56,13 @@ export default function CardExpirations() {
                                 className="flex justify-between space-y-2"
                             >
                                 <TableCell className="flex flex-col">
-                                    <h3>{`ยานพาหนะ: ${activity.vehicle_id}`}</h3>
+                                    <div className="flex items-center space-x-2">
+                                        <h3>{`ยานพาหนะ: ${activity.vehicle_id}`}</h3>
+                                        <BadgeCard />
+                                    </div>
                                     <p className="text-muted-foreground">{activity.name}</p>
                                     <p className="text-sm text-muted-foreground">{activity.expired_time}</p>
                                 </TableCell>
-                                <TableCell></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

@@ -14,6 +14,7 @@ import {
   LogOut,
 } from "lucide-react";
 import Image from "next/image";
+import { Separator } from "@/components/ui/separator";
 
 export default function AdminLayout({
   children,
@@ -39,7 +40,7 @@ export default function AdminLayout({
             className="cursor-pointer"
           />
         </div>
-        <hr className="mt-4 border-[#2e77b3]" />
+        <Separator className="mt-4" />
         <ul className="nav-list">
           <li>
             <Link
@@ -97,8 +98,7 @@ export default function AdminLayout({
             </Link>
           </li>
           <li className="profile">
-            <hr className="border-[#2e77b3] mb-2" />
-
+            <Separator className="mb-2" />
             <div className="flex">
               <div className="bg-aim-secondary p-2 rounded-lg">
                 <CircleUserRound color="#ffffff" />
