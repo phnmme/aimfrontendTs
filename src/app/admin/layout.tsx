@@ -12,6 +12,7 @@ import {
   History,
   CircleUserRound,
   LogOut,
+  Car,
 } from "lucide-react";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
@@ -55,26 +56,27 @@ export default function AdminLayout({
           </li>
           <li>
             <Link
-              href="/admin/vehicle"
-              className={pathname === "/admin/vehicle" ? "active" : ""}
-            >
-              <div className="lucide px-2 ">
-                <Users />
-              </div>
-              <span className="links_name">จัดการรถยนต์</span>
-            </Link>
-          </li>
-          <li>
-            <Link
               href="/admin/customer"
               className={pathname === "/admin/customer" ? "active" : ""}
             >
               <div className="icon px-2">
-                <Shield />
+                <Users />
               </div>
               <span className="links_name">จัดการลูกค้า</span>
             </Link>
           </li>
+          <li>
+            <Link
+              href="/admin/vehicle"
+              className={pathname === "/admin/vehicle" ? "active" : ""}
+            >
+              <div className="icon px-2 ">
+                <Car />
+              </div>
+              <span className="links_name">จัดการรถยนต์</span>
+            </Link>
+          </li>
+
           <li>
             <Link
               href="/admin/analytics"
