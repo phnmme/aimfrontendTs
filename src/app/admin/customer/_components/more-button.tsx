@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { customerGetMoreAction } from "@/actions/customer-action";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,67 +11,25 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { customerGetMoreType } from "@/types/customerType";
 import { Eye } from "lucide-react";
+import { useEffect, useState } from "react";
 
-const customerData = {
-  id: "b679a7e8-249c-4105-acf1-36ac69071164",
-  firstName: "phone",
-  lastName: "sucksis",
-  phone: "0661234567",
-  vehicles: [
-    {
-      id: "2cd968fb-457e-4732-9ade-d0bad27556f1",
-      vehicleNumber: "งง1133",
-      services: [
-        {
-          id: "d60196c4-f7a7-437f-9bc9-7dbf16c187c1",
-          serviceType: "C_M_I",
-          createdAt: "2025-09-30T13:30:18.345Z",
-        },
-        {
-          id: "08ac0228-a262-42a7-ac52-7ab53469aa9d",
-          serviceType: "vehicleTax",
-          createdAt: "2025-08-30T13:29:04.813Z",
-        },
-      ],
-    },
-    {
-      id: "1ee82314-acbe-4470-9dd3-8003178ce43f",
-      vehicleNumber: "งง-1234",
-      services: [
-        {
-          id: "6be7f53f-2eee-4e65-b011-a4505797cd52",
-          serviceType: "vehicleTax",
-          createdAt: "2025-09-28T14:40:52.071Z",
-        },
-      ],
-    },
-    {
-      id: "1ee82314-acbe-4470-9dd3-8003178ce43a",
-      vehicleNumber: "งง-1234",
-      services: [
-        {
-          id: "6be7f53f-2eee-4e65-b011-a4505797cd52",
-          serviceType: "vehicleTax",
-          createdAt: "2025-09-28T14:40:52.071Z",
-        },
-      ],
-    },
-    {
-      id: "1ee82314-acbe-4470-9dd3-8003178ce43t",
-      vehicleNumber: "งง-1234",
-      services: [
-        {
-          id: "6be7f53f-2eee-4e65-b011-a4505797cd52",
-          serviceType: "vehicleTax",
-          createdAt: "2025-09-28T14:40:52.071Z",
-        },
-      ],
-    },
-  ],
-};
+interface MoreButtonProps {
+  customerId: string;
+}
 
-export default function MoreButton() {
+export default function MoreButton({ customerId }: MoreButtonProps) {
+  const [customerData, setCustomerData] = useState<customerGetMoreType | null>(
+    null
+  );
+  useEffect(() => {
+    const fetchMoreData = async () => {
+      const result = await customerGetMoreAction(customerId);
+      setCustomerData(result.data);
+    };
+    fetchMoreData();
+  }, [customerId]);
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -93,39 +51,49 @@ export default function MoreButton() {
         <div className="mt-2">
           <p className="mb-2">
             <span className="font-semibold">ชื่อ:</span>{" "}
-            {customerData.firstName} {customerData.lastName}
+            {customerData?.firstName} {customerData?.lastName}
           </p>
           <p className="mb-4">
             <span className="font-semibold">เบอร์โทร:</span>{" "}
-            {customerData.phone}
+            {customerData?.phone}
           </p>
 
           <div className="max-h-80 overflow-y-auto">
-            {customerData.vehicles.map((vehicle) => (
-              <div
-                key={vehicle.id}
-                className="mb-4 p-3 border rounded-lg shadow-sm "
-              >
-                <p className="font-semibold mb-2">
-                  รถ: {vehicle.vehicleNumber}
-                </p>
-                <div className="ml-2">
-                  {vehicle.services.map((service) => (
-                    <div
-                      key={service.id}
-                      className="flex justify-between text-sm mb-1 px-2 py-1 rounded shadow"
-                    >
-                      <span>{service.serviceType}</span>
-                      <span className="text-gray-500">
-                        {new Date(service.createdAt).toLocaleDateString(
-                          "th-TH"
-                        )}
-                      </span>
-                    </div>
-                  ))}
+            {customerData?.vehicles && customerData.vehicles.length > 0 ? (
+              customerData.vehicles.map((vehicle) => (
+                <div
+                  key={vehicle.id}
+                  className="mb-4 p-3 border rounded-lg shadow-sm "
+                >
+                  <p className="font-semibold mb-2">
+                    รถ: {vehicle.vehicleNumber}
+                  </p>
+                  <div className="ml-2">
+                    {vehicle.services && vehicle.services.length > 0 ? (
+                      vehicle.services.map((service) => (
+                        <div
+                          key={service.id}
+                          className="flex justify-between text-sm mb-1 px-2 py-1 rounded shadow"
+                        >
+                          <span>{service.serviceType}</span>
+                          <span className="text-gray-500">
+                            {new Date(service.createdAt).toLocaleDateString(
+                              "th-TH"
+                            )}
+                          </span>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-center text-gray-500 text-sm">
+                        ไม่มีบริการ
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="text-center text-gray-500">ไม่มีข้อมูลรถ</p>
+            )}
           </div>
         </div>
 

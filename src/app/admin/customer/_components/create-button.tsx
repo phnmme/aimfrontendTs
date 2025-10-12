@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,71 +13,114 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { customerCreateAction } from "@/actions/customer-action";
+import { toast } from "sonner";
 
 export default function CreateButton() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [idCardOrTax, setIdCardOrTax] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!firstName || !lastName || !idCardOrTax || !phone) {
+      toast.error("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return;
+    }
+
+    customerCreateAction(firstName, lastName, idCardOrTax, phone)
+      .then((result) => {
+        toast.success(result.message);
+      })
+      .catch((error) => {
+        console.error("เกิดข้อผิดพลาด:", error);
+      });
+  };
+
   return (
     <Dialog>
-      <form>
-        <DialogTrigger asChild>
-          <Button className="bg-aim-primary hover:cursor-pointer text-white hover:bg-blue-950 hover:text-white">
-            เพิ่มลูกค้าใหม่
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-aim-primary">
+      <DialogTrigger asChild>
+        <Button className="bg-aim-primary text-white hover:bg-blue-950">
+          เพิ่มลูกค้าใหม่
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent className="sm:max-w-[425px] bg-aim-primary">
+        <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle className="text-lg font-semibold">
               เพิ่มลูกค้าใหม่
             </DialogTitle>
           </DialogHeader>
+
           <div className="grid gap-4">
             <div className="flex gap-3">
-              <div className="grid gap-3">
-                <Label htmlFor="firstName-1">ชื่อลูกค้า</Label>
+              <div className="grid gap-3 flex-1">
+                <Label htmlFor="firstName">ชื่อลูกค้า</Label>
                 <Input
-                  id="firstName-1"
-                  name="firstName"
+                  id="firstName"
                   placeholder="ใส่ชื่อลูกค้า"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required
                 />
               </div>
-              <div className="grid gap-3">
-                <Label htmlFor="lastName-1">นามสกุล</Label>
+              <div className="grid gap-3 flex-1">
+                <Label htmlFor="lastName">นามสกุล</Label>
                 <Input
-                  id="lastName-1"
-                  name="lastName"
+                  id="lastName"
                   placeholder="ใส่นามสกุล"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required
                 />
               </div>
             </div>
+
             <div className="grid gap-3">
-              <Label htmlFor="idCardOrTax-1">
+              <Label htmlFor="idCardOrTax">
                 เลขบัตรประชาชน หรือ รหัสผู้เสียภาษี
               </Label>
               <Input
-                id="idCardOrTax-1"
-                name="idCardOrTax"
+                id="idCardOrTax"
                 placeholder="ใส่เลขบัตรประชาชน หรือ รหัสผู้เสียภาษี"
+                value={idCardOrTax}
+                onChange={(e) => setIdCardOrTax(e.target.value)}
+                required
               />
             </div>
+
             <div className="grid gap-3">
-              <Label htmlFor="phone-1">เบอร์โทรศัพท์</Label>
-              <Input id="phone-1" name="phone" placeholder="ใส่เบอร์โทรศัพท์" />
+              <Label htmlFor="phone">เบอร์โทรศัพท์</Label>
+              <Input
+                id="phone"
+                placeholder="ใส่เบอร์โทรศัพท์"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+              />
             </div>
           </div>
+
           <DialogFooter>
             <DialogClose asChild>
-              <Button className="hover:cursor-pointer border border-gray-500 text-gray-500 hover:border-blue-500 hover:text-blue-500 hover:bg-aim-primary ">
+              <Button
+                type="button"
+                className="border border-gray-500 text-gray-500 hover:border-blue-500 hover:text-blue-500 bg-transparent"
+              >
                 ยกเลิก
               </Button>
             </DialogClose>
             <Button
-              className="bg-aim-secondary hover:cursor-pointer text-white hover:bg-blue-950 hover:text-white"
               type="submit"
+              className="bg-aim-secondary text-white hover:bg-blue-950"
             >
               เพิ่มข้อมูล
             </Button>
           </DialogFooter>
-        </DialogContent>
-      </form>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 }

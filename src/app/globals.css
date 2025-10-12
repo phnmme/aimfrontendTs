@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -188,6 +189,12 @@ p {
   font-size: clamp(14px, 2vw, 14px);
 }
 
+/* Universal Selector – reset ให้ทุก element */
+* {
+  box-sizing: border-box;
+  font-family: "Prompt", sans-serif;
+}
+
 .sidebar {
   position: fixed;
   left: 0;
@@ -200,24 +207,30 @@ p {
   z-index: 50;
   transition: all 0.5s ease;
   box-shadow: #00000048 0px 0px 10px 0px;
+  transition: all 0.5s ease;
 }
+
 .sidebar.close {
   width: 78px;
 }
+
 .sidebar.close .logo {
   margin-right: 15px;
   transition: 0.5s ease-in-out;
 }
+
 .sidebar .logo-details {
   height: 60px;
   display: flex;
   align-items: center;
   position: relative;
 }
+
 .sidebar .logo-details svg {
   opacity: 0;
   transition: all 0.5s ease;
 }
+
 .sidebar .logo-details .logo_name {
   color: #fff;
   font-size: 20px;
@@ -225,10 +238,12 @@ p {
   opacity: 0;
   transition: all 0.3s ease;
 }
+
 .sidebar.close .logo-details .icon,
 .sidebar.close .logo-details .logo_name {
   opacity: 1;
 }
+
 .sidebar .logo-details #btn {
   position: absolute;
   top: 50%;
@@ -241,24 +256,35 @@ p {
   cursor: pointer;
   transition: all 0.5s ease;
 }
+
 .sidebar.close .logo-details #btn {
   text-align: right;
 }
+
 .sidebar svg {
   color: #000;
   height: 40px;
   min-width: 30px;
   text-align: center;
 }
+
 .sidebar .nav-list {
   margin-top: 100px;
   height: 100%;
 }
+
 .sidebar li {
   position: relative;
   margin: 1.5rem 0;
   list-style: none;
 }
+
+/* Adjacent-Sibling Selector */
+.sidebar li + li {
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-top: 0.5rem;
+}
+
 .sidebar li a {
   display: flex;
   height: 100%;
@@ -270,23 +296,28 @@ p {
   transition: all 0.4s ease;
   color: #fff;
 }
+
 .sidebar li a:hover {
   background: rgba(0, 34, 108, 0.5);
   border-radius: 6px;
   box-shadow: 0 0 0 2px transparent, 0 0 0 2px #2e77b3 inset;
 }
+
 .sidebar li a.active {
   background: rgba(0, 34, 108, 0.5);
   border-radius: 6px;
   box-shadow: 0 0 0 2px transparent, 0 0 0 2px #c3d0db inset;
 }
+
 .sidebar li a.active svg {
   color: #89b6db;
 }
+
 .sidebar li a.active .links_name {
   color: #fff;
   @apply bg-gradient-to-r from-[#c2e0f9] to-[#89b6db] bg-clip-text text-transparent;
 }
+
 .sidebar li a .links_name {
   color: #fff;
   font-size: 14px;
@@ -295,17 +326,21 @@ p {
   pointer-events: none;
   transition: 0.4s;
 }
+
 .sidebar.close li a .links_name {
   opacity: 1;
   pointer-events: auto;
 }
+
 .sidebar li a:hover .links_name {
   @apply bg-gradient-to-r from-[#c2e0f9] to-[#2e77b3] bg-clip-text text-transparent;
 }
+
 .sidebar li a:hover svg {
   color: #337cdb;
   transition: all 0.5s ease;
 }
+
 .sidebar li svg {
   color: #fff;
   height: 40px;
@@ -313,6 +348,7 @@ p {
   font-size: 15px;
   border-radius: 6px;
 }
+
 .sidebar li.profile {
   position: fixed;
   height: 100px;
@@ -323,6 +359,7 @@ p {
   transition: all 0.5s ease;
   overflow: hidden;
 }
+
 .sidebar.close li.profile {
   width: 78px;
 }
@@ -334,6 +371,7 @@ p {
   border-radius: 6px;
   margin-right: 10px;
 }
+
 .app-main {
   position: relative;
   min-height: 100vh;
@@ -343,16 +381,40 @@ p {
   width: calc(100% - 250px);
 }
 
-/* globals.css */
-@keyframes borderMove {
-  to {
-    background-position: 200% 0;
-  }
+/* Attribute Selector */
+.sidebar a[href="/admin/dashboard"] {
+  font-weight: bold;
+  color: #89b6db;
 }
 
-@layer utilities {
-  .animate-gradient {
-    animation: borderMove 6s linear infinite;
-    background-size: 200% 100%;
+/* Pseudo-element Selector */
+.sidebar li a::before {
+  content: "•";
+  margin-right: 8px;
+  color: #2e77b3;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.sidebar li a:hover::before {
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 250px !important;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.translate-x-0 {
+    transform: translateX(0);
+  }
+
+  .app-main {
+    width: 80% !important;
+    left: 0 !important;
+  }
+
+  .nav-list {
+    margin-top: 0px;
   }
 }

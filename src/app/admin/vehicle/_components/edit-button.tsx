@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Cog, FilePlus } from "lucide-react";
+import { FilePlus } from "lucide-react";
 
 export enum ServiceType {
   TAX = "vehicleTax",

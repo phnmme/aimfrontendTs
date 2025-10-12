@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -9,8 +8,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Cog, Trash2 } from "lucide-react";
 import CreateButton from "./create-button";
 import DeleteButton from "./delete-button";
 import EditButton from "./edit-button";

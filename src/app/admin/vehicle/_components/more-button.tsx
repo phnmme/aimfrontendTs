@@ -11,7 +11,7 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
-import { Eye, X } from "lucide-react";
+import { Eye } from "lucide-react";
 
 interface Service {
   id: string;

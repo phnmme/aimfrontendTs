@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Eye, EyeOff, LogIn } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { loginAction } from "@/actions/login-action";
+import { loginAction } from "@/actions/auth-action";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -16,16 +16,22 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const result = await loginAction(email, password);
 
-    setMessage(result.message);
+    loginAction(email, password)
+      .then((result) => {
+        setMessage(result.message);
 
-    if (result.success) {
-      router.refresh();
-      router.push("/admin/dashboard");
-    }
+        if (result.success) {
+          router.refresh();
+          router.push("/admin/dashboard");
+        }
+      })
+      .catch((error) => {
+        console.error("Login error:", error);
+        setMessage("เกิดข้อผิดพลาดในการเข้าสู่ระบบ");
+      });
   };
 
   return (
@@ -41,7 +47,6 @@ export default function LoginForm() {
 
       <CardContent>
         <form onSubmit={handleSubmit} className="grid gap-6">
-          {/* Email */}
           <div className="grid gap-2">
             <Label htmlFor="email">อีเมล</Label>
             <Input
@@ -54,7 +59,6 @@ export default function LoginForm() {
             />
           </div>
 
-          {/* Password */}
           <div className="grid gap-2">
             <Label htmlFor="password">รหัสผ่าน</Label>
             <div className="relative">
@@ -80,7 +84,6 @@ export default function LoginForm() {
             </div>
           </div>
 
-          {/* Login Button */}
           <Button
             type="submit"
             className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white"
@@ -94,7 +97,6 @@ export default function LoginForm() {
           )}
         </form>
 
-        {/* Footer */}
         <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
           ยังไม่มีบัญชี?{" "}
           <a
