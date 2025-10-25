@@ -218,7 +218,7 @@ p {
   transition: 0.5s ease-in-out;
 }
 
-.sidebar .logo-details {
+.sidebar > .logo-details {
   height: 60px;
   display: flex;
   align-items: center;
