@@ -203,14 +203,15 @@ export default function EditButton({
         <DialogFooter>
           <DialogClose asChild>
             <Button
-              className="border border-gray-500 text-gray-500 hover:border-blue-500 hover:text-blue-500 hover:bg-aim-primary"
+              variant="outline"
               onClick={closeDialog}
+              className="border border-gray-500 text-gray-500 hover:border-blue-500 hover:text-blue-500 hover:bg-gray-100"
             >
               ยกเลิก
             </Button>
           </DialogClose>
           <Button
-            className="bg-aim-secondary text-white hover:bg-blue-950"
+            className="bg-blue-500 hover:bg-blue-400 hover:text-white border-blue-600"
             onClick={handleSubmit}
             disabled={loading}
           >

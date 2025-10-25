@@ -103,7 +103,6 @@ export default function TableSearch() {
 
   return (
     <div className="mt-8">
-      {/* 🔍 Search Bar */}
       <div className="flex flex-col sm:flex-row justify-between gap-3">
         <div className="flex gap-2 w-full sm:w-auto">
           <Input
@@ -123,8 +122,6 @@ export default function TableSearch() {
         </div>
         <CreateButton />
       </div>
-
-      {/* 📱 Responsive Table / Cards */}
       <div
         className="
     mt-4 border bg-card rounded-lg 
@@ -181,6 +178,7 @@ export default function TableSearch() {
                             variant="outline"
                             size="sm"
                             onClick={() => setSelectedCustomer(customer)}
+                            className="text-blue-600 bg-blue-200 border border-blue-700 hover:bg-blue-500"
                           >
                             จัดการ
                           </Button>
@@ -191,13 +189,13 @@ export default function TableSearch() {
                       ${
                         isMobile
                           ? "rounded-t-lg pb-6"
-                          : "max-w-md mx-auto my-10 rounded-xl shadow-xl border bg-card"
+                          : "max-w-2xl mx-auto my-10 rounded-t-xl shadow-xl border-t bg-card"
                       }
                     `}
                         >
                           <div className="mx-auto w-full max-w-sm">
                             <DrawerHeader>
-                              <DrawerTitle>
+                              <DrawerTitle className="text-white">
                                 จัดการลูกค้า: {selectedCustomer?.firstName}{" "}
                                 {selectedCustomer?.lastName}
                               </DrawerTitle>
@@ -216,14 +214,16 @@ export default function TableSearch() {
                                 lastName={selectedCustomer?.lastName ?? ""}
                                 phone={selectedCustomer?.phone ?? ""}
                               />
-                              <DeleteButton />
+                              <DeleteButton
+                                customerId={selectedCustomer?.customerId ?? ""}
+                              />
                             </div>
 
                             <DrawerFooter>
                               <DrawerClose asChild>
                                 <Button
                                   variant="outline"
-                                  className="w-full sm:w-auto"
+                                  className="w-full sm:w-auto text-black hover:bg-gray-300  border-gray-300"
                                 >
                                   ปิด
                                 </Button>

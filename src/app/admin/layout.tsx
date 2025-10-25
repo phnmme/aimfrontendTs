@@ -7,14 +7,13 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   Users,
-  Shield,
-  Package,
-  History,
   CircleUserRound,
   LogOut,
   Car,
   X,
   Menu,
+  ReceiptText,
+  Cog,
 } from "lucide-react";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
@@ -43,13 +42,13 @@ export default function AdminLayout({
     <div className="flex min-h-screen bg-aim-background text-white">
       {isMobile && menuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40"
+          className="fixed inset-0 bg-black/50 z-40 print:hidden"
           onClick={() => setMenuOpen(false)}
         />
       )}
 
       <div
-        className={`sidebar fixed top-0 left-0 h-full z-50 bg-[#17213a] text-white transition-all duration-500
+        className={`sidebar fixed top-0 left-0 h-full z-50 bg-[#17213a] text-white transition-all duration-500 print:hidden
         ${isMobile ? (menuOpen ? "translate-x-0" : "-translate-x-full") : ""}
         ${!isMobile && close ? "w-[78px]" : "w-[250px]"}`}
       >
@@ -71,11 +70,16 @@ export default function AdminLayout({
               icon: <LayoutDashboard />,
               name: "แดชบอร์ด",
             },
+            {
+              href: "/admin/slip",
+              icon: <ReceiptText />,
+              name: "ใบเสร็จรับเงิน",
+            },
             { href: "/admin/customer", icon: <Users />, name: "จัดการลูกค้า" },
             { href: "/admin/vehicle", icon: <Car />, name: "จัดการรถยนต์" },
             {
               href: "/admin/configsite",
-              icon: <History />,
+              icon: <Cog />,
               name: "ตั้งค่าระบบ",
             },
           ].map((item) => (
@@ -121,7 +125,7 @@ export default function AdminLayout({
         }`}
       >
         {/* Navbar */}
-        <div className="shadow-md bg-aim-navbar-top w-full z-40 fixed p-4 flex items-center gap-4">
+        <div className="shadow-md bg-aim-navbar-top w-full z-40 fixed p-4 flex items-center gap-4 print:hidden">
           {isMobile ? (
             <button
               onClick={toggleMenu}

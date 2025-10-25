@@ -21,6 +21,7 @@ export default function CreateButton() {
   const [lastName, setLastName] = useState("");
   const [idCardOrTax, setIdCardOrTax] = useState("");
   const [phone, setPhone] = useState("");
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,14 +33,18 @@ export default function CreateButton() {
     customerCreateAction(firstName, lastName, idCardOrTax, phone)
       .then((result) => {
         toast.success(result.message);
+        setOpen(false);
+        setTimeout(() => window.location.reload(), 300);
       })
       .catch((error) => {
+        setOpen(false);
+        toast.error("เกิดข้อผิดพลาด");
         console.error("เกิดข้อผิดพลาด:", error);
       });
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="bg-aim-primary text-white hover:bg-blue-950">
           เพิ่มลูกค้าใหม่
@@ -103,22 +108,24 @@ export default function CreateButton() {
             </div>
           </div>
 
-          <DialogFooter>
-            <DialogClose asChild>
+          <div className="mt-4">
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button
+                  type="button"
+                  className="border border-gray-500 text-gray-500 hover:border-blue-500 hover:text-blue-500 hover:bg-gray-100"
+                >
+                  ยกเลิก
+                </Button>
+              </DialogClose>
               <Button
-                type="button"
-                className="border border-gray-500 text-gray-500 hover:border-blue-500 hover:text-blue-500 bg-transparent"
+                type="submit"
+                className="bg-aim-secondary text-white hover:bg-blue-950"
               >
-                ยกเลิก
+                เพิ่มข้อมูล
               </Button>
-            </DialogClose>
-            <Button
-              type="submit"
-              className="bg-aim-secondary text-white hover:bg-blue-950"
-            >
-              เพิ่มข้อมูล
-            </Button>
-          </DialogFooter>
+            </DialogFooter>
+          </div>
         </form>
       </DialogContent>
     </Dialog>

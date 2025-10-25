@@ -99,7 +99,10 @@ export default function MoreButton({ customerId }: MoreButtonProps) {
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button className="hover:cursor-pointer border border-gray-500 text-gray-500 hover:border-blue-500 hover:text-blue-500 hover:bg-gray-100">
+            <Button
+              variant="outline"
+              className="border border-gray-500 text-gray-500 hover:border-blue-500 hover:text-blue-500 hover:bg-gray-100"
+            >
               ปิด
             </Button>
           </DialogClose>
