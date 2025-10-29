@@ -1,37 +1,30 @@
-"use server";
-
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function loginAction(email: string, password: string) {
-  const res = await fetch(
-    `https://preview-api.kivotos.sh/api/v1/auth/guest/login`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+  try {
+    const res = await fetch(
+      "https://preview-api.kivotos.sh/api/v1/auth/guest/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      return { success: false, message: data.message || "Login failed" };
     }
-  );
-  const data = await res.json();
-  if (!res.ok) {
-    return { success: false, message: data.message };
+
+    return { success: true, message: "Login สำเร็จ", token: data.data.token };
+  } catch (error) {
+    console.error("loginAction error:", error);
+    return { success: false, message: "ไม่สามารถเชื่อมต่อ server ได้" };
   }
-  const cookieStore = await cookies();
-  cookieStore.set("token", data.data.token, {
-    name: "token",
-    value: data.data.token,
-    httpOnly: true,
-    secure: true,
-    path: "/",
-    maxAge: 60 * 60,
-    sameSite: "none",
-  });
-
-  redirect("/admin/dashboard");
 }
-
 export async function getMe() {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/auth/authorized/me`,
     {
@@ -55,7 +48,7 @@ export async function getMe() {
 }
 
 export async function logoutAction() {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/auth/authorized/logout`,
     {
@@ -71,7 +64,7 @@ export async function logoutAction() {
     return { success: false, message: data.message };
   }
 
-  const cookieStore = await cookies();
-  cookieStore.delete({ name: "token", path: "/" });
+  localStorage.removeItem("token");
+
   redirect("/landing");
 }

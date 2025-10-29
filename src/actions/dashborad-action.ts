@@ -1,9 +1,5 @@
-"use server";
-
-import { cookies } from "next/headers";
-
 export async function dashboardGetSummaryAction() {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}
 api/v1/analysis/authorized/summary`,
@@ -27,7 +23,7 @@ api/v1/analysis/authorized/summary`,
 }
 
 export async function getLog() {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/analysis/authorized/getlog`,
     {
@@ -50,7 +46,7 @@ export async function getLog() {
 }
 
 export async function getTotalGraph() {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/analysis/authorized/totalGraph`,
     {

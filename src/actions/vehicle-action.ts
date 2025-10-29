@@ -1,9 +1,7 @@
-"use server";
 import { ServiceType } from "./../app/admin/vehicle/_components/edit-button";
-import { cookies } from "next/headers";
 
 export async function vehicleGetAllAction(limit = 10, cursor?: string) {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   const params = new URLSearchParams();
   params.append("limit", String(limit));
   if (cursor) params.append("cursor", cursor);
@@ -37,7 +35,7 @@ export async function vehicleGetAllAction(limit = 10, cursor?: string) {
 }
 
 export async function vehicleSearchAction(keyword: string) {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(
       `${
@@ -70,7 +68,7 @@ export async function vehicleSearchAction(keyword: string) {
 }
 
 export async function vehicleGetMoreAction(vehicleId: string) {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   const res = await fetch(
     `${
       process.env.NEXT_PUBLIC_HOST_URL
@@ -102,7 +100,7 @@ export async function vehicleCreateAction(
   vehicleNumber: string,
   customerId: string
 ) {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/vehicle/authorized/create`,
@@ -139,7 +137,7 @@ export async function vehicleuploadAction(
   endDate: string,
   file: File
 ) {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
 
   const formData = new FormData();
   formData.append("vehicleId", vehicleId);
@@ -174,7 +172,7 @@ export async function vehicleuploadAction(
 }
 
 export async function vehicleDeleteAction(vehicleId: string) {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(
       `${

@@ -31,4 +31,14 @@ interface totalGraphType {
   }[];
 }
 
-export type { summaryType, logType, totalGraphType };
+interface MonthlyData {
+  month: string;
+  totalCustomers: number;
+  totalServices: number;
+}
+
+interface YearlyData {
+  [year: string]: MonthlyData[];
+}
+
+export type { summaryType, logType, totalGraphType, YearlyData, MonthlyData };

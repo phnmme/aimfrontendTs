@@ -1,12 +1,17 @@
-import { requireAuth } from "@/lib/authGuard";
-import TableSearch from "./_components/table-search";
-import { redirect } from "next/navigation";
+"use client";
 
-export default async function CustomerPage() {
-  const auth = await requireAuth();
-  if (!auth) {
-    return redirect("/landing/auth/login");
-  }
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import TableSearch from "./_components/table-search";
+
+export default function CustomerPage() {
+  const router = useRouter();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/landing/auth/login");
+    }
+  }, [router]);
 
   return (
     <main className="w-full p-8">
