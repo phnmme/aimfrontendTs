@@ -14,23 +14,43 @@ export default async function DashboardPage() {
   const summary = await dashboardGetSummaryAction();
   const log = await getLog();
   const totalGraph = await getTotalGraph();
-  // console.log("totalGraph", totalGraph);
+
   return (
-    <main>
-      <div className=" w-full p-8">
-        <div>
-          <h1 className="font-extrabold bg-gradient-to-r from-[#c2e0f9] to-[#2e77b3] bg-clip-text text-transparent">
-            ยินดีต้อนรับสู่หน้าแดชบอร์ด
-          </h1>
-          <p className="text-slate-500"> ภาพรวมของ AIM-L</p>
-        </div>
+    <main className="w-full p-8">
+      {/* Header */}
+      <header className="mb-8">
+        <h1 className="text-3xl font-extrabold bg-gradient-to-r from-[#c2e0f9] to-[#2e77b3] bg-clip-text text-transparent">
+          ยินดีต้อนรับสู่หน้าแดชบอร์ด
+        </h1>
+        <p className="text-slate-500">ภาพรวมของ AIM-L</p>
+      </header>
+
+      <section aria-labelledby="summary-section" className="mb-8">
+        <h2 id="summary-section" className="sr-only">
+          สรุปข้อมูลภาพรวม
+        </h2>
         <CardSummarized summary={summary.data} />
-        <div className="md:flex gap-8 ">
+      </section>
+
+      <section
+        aria-labelledby="activities-section"
+        className="flex flex-col md:flex-row  gap-8 mb-8"
+      >
+        <article aria-label="กิจกรรมล่าสุด" className="flex-1/2">
           <CardActivities log={log.data} />
+        </article>
+
+        <article aria-label="ข้อมูลที่ใกล้หมดอายุ" className="flex-1/2">
           <CardExpirations summary={summary.data} />
-        </div>
+        </article>
+      </section>
+
+      <section aria-labelledby="graph-section">
+        <h2 id="graph-section" className="sr-only">
+          สถิติและแนวโน้ม
+        </h2>
         <Recharts data={totalGraph.data} />
-      </div>
+      </section>
     </main>
   );
 }

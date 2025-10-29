@@ -47,26 +47,29 @@ export default function Recharts({ data }: RechartsProps) {
 
   return (
     <div className="flex flex-col items-center gap-4 w-full min-h-[500px] my-2 ">
-      <div className="self-end flex gap-2">
-        <Label>เลือกปี:</Label>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button className="text-black" variant="outline">
-              {selectedYear || "เลือกปี"}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {years.map((year) => (
-              <DropdownMenuItem
-                className="cursor-pointer"
-                key={year}
-                onClick={() => setSelectedYear(year)}
-              >
-                ปี {year}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+      <div className="flex justify-between items-center w-full">
+        <h2 className="text-xl font-semibold mb-2">สถิติรายเดือน</h2>
+        <div className="flex items-center gap-2">
+          <Label>เลือกปี:</Label>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="text-black" variant="outline">
+                {selectedYear || "เลือกปี"}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              {years.map((year) => (
+                <DropdownMenuItem
+                  className="cursor-pointer"
+                  key={year}
+                  onClick={() => setSelectedYear(year)}
+                >
+                  ปี {year}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
 
       {chartData.length > 0 ? (

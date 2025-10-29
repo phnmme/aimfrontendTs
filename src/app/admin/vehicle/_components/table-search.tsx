@@ -56,7 +56,7 @@ export default function TableSearch() {
   useEffect(() => {
     fetchVehicles();
 
-    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -98,68 +98,90 @@ export default function TableSearch() {
   };
 
   return (
-    <div className="mt-8">
-      <div className="flex flex-col sm:flex-row justify-between gap-3">
-        <div className="flex gap-2 w-full sm:w-auto">
+    <section
+      className="mt-4 sm:mt-8 px-2 sm:px-0"
+      aria-labelledby="customer-table-section"
+    >
+      <header className="flex flex-col sm:flex-row justify-between items-stretch gap-3 mb-4">
+        <form
+          className="flex gap-2 w-full sm:w-auto flex-1 sm:flex-initial"
+          onSubmit={(e) => {
+            e.preventDefault();
+            searchVehicles();
+          }}
+          role="search"
+          aria-label="ค้นหาลูกค้า"
+        >
           <Input
             placeholder="ค้นหาข้อมูลลูกค้า"
             type="text"
-            className="w-full sm:w-80 bg-card border-aim-primary"
+            className="flex-1 sm:w-80 bg-card border-aim-primary text-sm sm:text-base"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
           <Button
+            type="submit"
             variant="outline"
-            onClick={searchVehicles}
-            className="bg-blue-500 hover:bg-blue-400 hover:text-white border-blue-600"
+            className="bg-blue-500 hover:bg-blue-400 hover:text-white border-blue-600 whitespace-nowrap px-4 sm:px-6 text-sm sm:text-base"
           >
             ค้นหา
           </Button>
-        </div>
-        <CreateButton />
-      </div>
+        </form>
 
-      <div
+        <div className="w-full sm:w-auto">
+          <CreateButton />
+        </div>
+      </header>
+
+      <article
         className="
-    mt-4 border bg-card rounded-lg 
-    p-2 sm:p-4 md:p-6 
-    bg-aim-navbar-top
-    overflow-x-auto 
-    scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent
-  "
+          border bg-card rounded-lg 
+          p-2 sm:p-4 md:p-6 
+          bg-aim-navbar-top
+          overflow-x-scroll sm:overflow-x-auto
+          scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent
+          -mx-2 sm:mx-0
+        "
       >
-        <div className="min-w-[700px] sm:min-w-full">
-          <Table className="w-full text-sm md:text-base">
+        <div className="min-w-[650px] sm:min-w-full">
+          <Table
+            className="w-full text-xs sm:text-sm md:text-base"
+            aria-labelledby="customer-table-section"
+          >
+            <caption className="sr-only" id="customer-table-section">
+              ตารางข้อมูลลูกค้า
+            </caption>
             <TableHeader>
               <TableRow className="bg-black/20 hover:bg-black/20">
-                <TableHead className="text-aim-primary text-center">
+                <TableHead className="text-aim-primary text-center text-xs sm:text-sm whitespace-nowrap">
                   ทะเบียน
                 </TableHead>
-                <TableHead className="text-aim-primary text-center">
+                <TableHead className="text-aim-primary text-center text-xs sm:text-sm whitespace-nowrap">
                   ชื่อลูกค้า
                 </TableHead>
-                <TableHead className="text-aim-primary text-center">
+                <TableHead className="text-aim-primary text-center text-xs sm:text-sm whitespace-nowrap">
                   เบอร์โทรศัพท์
                 </TableHead>
-                <TableHead className="text-aim-primary text-center">
+                <TableHead className="text-aim-primary text-center text-xs sm:text-sm whitespace-nowrap">
                   จัดการ
                 </TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody>
+
+            <TableBody className="">
               {vehicles && vehicles.length > 0 ? (
                 vehicles.map((vehicle) => (
                   <TableRow
                     key={vehicle.vehicleId}
                     className="hover:bg-black/10"
                   >
-                    <TableCell className="text-center">
+                    <TableCell className="text-center text-xs sm:text-sm whitespace-nowrap">
                       {vehicle.vehicleNumber}
                     </TableCell>
-                    <TableCell className="text-center">
+                    <TableCell className="text-center text-xs sm:text-sm whitespace-nowrap">
                       {vehicle.firstName} {vehicle.lastName}
                     </TableCell>
-                    <TableCell className="text-center">
+                    <TableCell className="text-center text-xs sm:text-sm whitespace-nowrap">
                       {vehicle.phone}
                     </TableCell>
                     <TableCell className="text-center">
@@ -169,33 +191,31 @@ export default function TableSearch() {
                             variant="outline"
                             size="sm"
                             onClick={() => setSelectedVehicle(vehicle)}
-                            className="text-blue-600 bg-blue-200 border border-blue-700 hover:bg-blue-500"
+                            className="text-blue-600 bg-blue-200 border border-blue-700 hover:bg-blue-500 text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 whitespace-nowrap"
                           >
                             จัดการ
                           </Button>
                         </DrawerTrigger>
 
                         <DrawerContent
-                          className={`
-                      ${
-                        isMobile
-                          ? "rounded-t-lg pb-6"
-                          : "max-w-2xl mx-auto my-10 rounded-t-xl shadow-xl border-t bg-card"
-                      }
-                    `}
+                          className={`${
+                            isMobile
+                              ? "rounded-t-lg pb-6 h-auto max-h-[85vh]"
+                              : "max-w-2xl mx-auto my-10 rounded-t-xl shadow-xl border-t bg-card"
+                          }`}
                         >
-                          <div className="mx-auto w-full max-w-sm">
-                            <DrawerHeader>
-                              <DrawerTitle className="text-white">
+                          <div className="mx-auto w-full max-w-sm px-4 sm:px-0">
+                            <DrawerHeader className="px-0 sm:px-6">
+                              <DrawerTitle className="text-white text-base sm:text-lg">
                                 ทะเบียน: {selectedVehicle?.vehicleNumber}
                               </DrawerTitle>
-                              <DrawerDescription>
+                              <DrawerDescription className="text-sm">
                                 จัดการลูกค้า: {selectedVehicle?.firstName}{" "}
                                 {selectedVehicle?.lastName}
                               </DrawerDescription>
                             </DrawerHeader>
 
-                            <div className="p-4 flex flex-col gap-3">
+                            <section className="p-0 sm:p-4 flex flex-col gap-2 sm:gap-3">
                               <MoreButton
                                 vehicleId={selectedVehicle?.vehicleId ?? ""}
                               />
@@ -205,13 +225,13 @@ export default function TableSearch() {
                               <DeleteButton
                                 vehicleId={selectedVehicle?.vehicleId ?? ""}
                               />
-                            </div>
+                            </section>
 
-                            <DrawerFooter>
+                            <DrawerFooter className="px-0 sm:px-6 pb-4 sm:pb-6">
                               <DrawerClose asChild>
                                 <Button
                                   variant="outline"
-                                  className="w-full sm:w-auto text-black hover:bg-gray-300  border-gray-300"
+                                  className="w-full sm:w-auto text-black hover:bg-gray-300 border-gray-300"
                                 >
                                   ปิด
                                 </Button>
@@ -225,7 +245,10 @@ export default function TableSearch() {
                 ))
               ) : (
                 <TableRow key="no-data">
-                  <TableCell colSpan={5} className="text-center text-gray-400">
+                  <TableCell
+                    colSpan={4}
+                    className="text-center text-gray-400 py-8 text-sm"
+                  >
                     ไม่พบข้อมูลลูกค้า
                   </TableCell>
                 </TableRow>
@@ -233,16 +256,15 @@ export default function TableSearch() {
             </TableBody>
           </Table>
         </div>
-      </div>
+      </article>
 
-      {/* Pagination */}
-      <div className="my-4">
+      <footer className="my-4 px-2 sm:px-0">
         <PaginationTable
           currentPage={currentPage}
           totalPages={Math.ceil(totalCount / 10)}
           onPageChange={handlePageChange}
         />
-      </div>
-    </div>
+      </footer>
+    </section>
   );
 }
