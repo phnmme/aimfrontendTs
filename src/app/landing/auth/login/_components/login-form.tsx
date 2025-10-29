@@ -18,18 +18,13 @@ export default function LoginForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const result = await loginAction(email, password);
 
-    try {
-      const result = await loginAction(email, password);
-      setMessage(result.message);
+    setMessage(result.message);
 
-      if (result.success) {
-        router.refresh();
-        router.push("/admin/dashboard");
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      setMessage("เกิดข้อผิดพลาดในการเข้าสู่ระบบ");
+    if (result.success && result.token) {
+      localStorage.setItem("token", result.token);
+      router.push("/admin/dashboard");
     }
   };
 

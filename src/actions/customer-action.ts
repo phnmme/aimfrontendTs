@@ -1,13 +1,10 @@
-"use server";
-import { cookies } from "next/headers";
-
 export async function customerCreateAction(
   firstName: string,
   lastName: string,
   idCardOrTax: string,
   phone: string
 ) {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/customer/authorized/create`,
     {
@@ -32,7 +29,7 @@ export async function customerCreateAction(
 }
 
 export async function customerGetAllAction(limit = 10, cursor?: string) {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   const params = new URLSearchParams();
   params.append("limit", String(limit));
   if (cursor) params.append("cursor", cursor);
@@ -66,7 +63,7 @@ export async function customerGetAllAction(limit = 10, cursor?: string) {
 }
 
 export async function customerSearchAction(keyword: string) {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(
       `${
@@ -101,7 +98,7 @@ export async function customerSearchAction(keyword: string) {
 }
 
 export async function customerGetMoreAction(customerId: string) {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   const res = await fetch(
     `${
       process.env.NEXT_PUBLIC_HOST_URL
@@ -129,7 +126,7 @@ export async function customerEditAction(
   lastNameE: string,
   phoneE: string
 ) {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   const res = await fetch(
     `${
       process.env.NEXT_PUBLIC_HOST_URL
@@ -158,7 +155,7 @@ export async function customerEditAction(
 }
 
 export async function customerDeleteAction(customerId: string) {
-  const token = (await cookies()).get("token")?.value;
+  const token = localStorage.getItem("token");
   const res = await fetch(
     `${
       process.env.NEXT_PUBLIC_HOST_URL

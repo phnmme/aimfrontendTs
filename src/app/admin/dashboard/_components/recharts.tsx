@@ -19,29 +19,23 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { MonthlyData, YearlyData } from "@/types/dashboradType";
 
-interface GraphItem {
-  month: string;
-  totalCustomers: number;
-  totalServices: number;
-}
-
-interface RawData {
-  [year: string]: GraphItem[];
-}
-
-interface RechartsProps {
-  data: RawData;
-}
-
-export default function Recharts({ data }: RechartsProps) {
+export default function Recharts({ data }: { data: YearlyData }) {
   const years = Object.keys(data).sort((a, b) => Number(b) - Number(a));
-  const [selectedYear, setSelectedYear] = useState(years[0] || "");
-  const [chartData, setChartData] = useState<GraphItem[]>([]);
+  const [selectedYear, setSelectedYear] = useState<string>();
 
   useEffect(() => {
-    if (selectedYear) {
-      setChartData(data[selectedYear] ?? []);
+    if (years.length > 0 && !selectedYear) {
+      setSelectedYear(years[0]);
+    }
+  }, [years, selectedYear]);
+
+  const [chartData, setChartData] = useState<MonthlyData[]>([]);
+
+  useEffect(() => {
+    if (selectedYear && data[selectedYear]) {
+      setChartData(data[selectedYear]);
     }
   }, [selectedYear, data]);
 
