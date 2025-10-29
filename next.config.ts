@@ -13,6 +13,11 @@ const nextConfig = {
         port: "4000",
         pathname: "/api/v1/file/authorized/file/**",
       },
+      {
+        protocol: "https",
+        hostname: "preview-api.kivotos.sh",
+        pathname: "/**",
+      },
     ],
   },
 };
