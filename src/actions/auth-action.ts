@@ -25,16 +25,15 @@ export async function loginAction(email: string, password: string) {
 }
 export async function getMe() {
   const token = localStorage.getItem("token");
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/auth/authorized/me`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const host = process.env.NEXT_PUBLIC_HOST_URL;
+  console.log("Host URL:", host);
+  const res = await fetch(`${host}api/v1/auth/authorized/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
   const data = await res.json();
   if (!res.ok) {
     return { success: false, message: data.message };
