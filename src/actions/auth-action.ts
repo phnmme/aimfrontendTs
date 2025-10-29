@@ -5,13 +5,15 @@ import { redirect } from "next/navigation";
 
 export async function loginAction(email: string, password: string) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/auth/guest/login`,
+    `https://preview-api.kivotos.sh/api/v1/auth/guest/login`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     }
   );
+  // const text = await res.text();
+  // console.log("Response text:", text);
   const data = await res.json();
   if (!res.ok) {
     return { success: false, message: data.message };
@@ -33,7 +35,7 @@ export async function loginAction(email: string, password: string) {
 export async function getMe() {
   const token = (await cookies()).get("token")?.value;
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/auth/authorized/me`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/auth/authorized/me`,
     {
       method: "GET",
       headers: {
@@ -57,7 +59,7 @@ export async function getMe() {
 export async function logoutAction() {
   const token = (await cookies()).get("token")?.value;
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/auth/authorized/logout`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/auth/authorized/logout`,
     {
       method: "POST",
       headers: {
