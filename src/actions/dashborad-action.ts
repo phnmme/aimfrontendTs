@@ -1,7 +1,6 @@
 export async function dashboardGetSummaryAction() {
   const token = localStorage.getItem("token");
   const host = process.env.NEXT_PUBLIC_HOST_URL;
-  console.log("Host URL:", host);
   const res = await fetch(host + "api/v1/analysis/authorized/summary", {
     method: "GET",
     headers: {
