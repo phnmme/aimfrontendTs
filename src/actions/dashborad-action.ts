@@ -1,39 +1,12 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
-export async function loginAction(email: string, password: string) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/auth/guest/login`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    }
-  );
-  const data = await res.json();
-  if (!res.ok) {
-    return { success: false, message: data.message };
-  }
-  const cookieStore = await cookies();
-  cookieStore.set("token", data.data.token, {
-    name: "token",
-    value: data.data.token,
-    httpOnly: true,
-    secure: true,
-    path: "/",
-    maxAge: 60 * 60,
-    sameSite: "none",
-  });
-
-  redirect("/admin/dashboard");
-}
-
-export async function getMe() {
+export async function dashboardGetSummaryAction() {
   const token = (await cookies()).get("token")?.value;
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/auth/authorized/me`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}
+/api/v1/analysis/authorized/summary`,
     {
       method: "GET",
       headers: {
@@ -46,7 +19,6 @@ export async function getMe() {
   if (!res.ok) {
     return { success: false, message: data.message };
   }
-
   return {
     success: true,
     message: data.message,
@@ -54,12 +26,12 @@ export async function getMe() {
   };
 }
 
-export async function logoutAction() {
+export async function getLog() {
   const token = (await cookies()).get("token")?.value;
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/auth/authorized/logout`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/analysis/authorized/getlog`,
     {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -70,8 +42,32 @@ export async function logoutAction() {
   if (!res.ok) {
     return { success: false, message: data.message };
   }
+  return {
+    success: true,
+    message: data.message,
+    data: data.data,
+  };
+}
 
-  const cookieStore = await cookies();
-  cookieStore.delete({ name: "token", path: "/" });
-  redirect("/landing");
+export async function getTotalGraph() {
+  const token = (await cookies()).get("token")?.value;
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/analysis/authorized/totalGraph`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const data = await res.json();
+  if (!res.ok) {
+    return { success: false, message: data.message };
+  }
+  return {
+    success: true,
+    message: data.message,
+    data: data.data,
+  };
 }

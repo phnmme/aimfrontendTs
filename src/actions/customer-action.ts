@@ -9,7 +9,7 @@ export async function customerCreateAction(
 ) {
   const token = (await cookies()).get("token")?.value;
   const res = await fetch(
-    `${process.env.HOST_URL}/api/v1/customer/authorized/create`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/customer/authorized/create`,
     {
       method: "POST",
       headers: {
@@ -39,7 +39,7 @@ export async function customerGetAllAction(limit = 10, cursor?: string) {
 
   const res = await fetch(
     `${
-      process.env.HOST_URL
+      process.env.NEXT_PUBLIC_HOST_URL
     }/api/v1/customer/authorized/list?${params.toString()}`,
     {
       headers: {
@@ -70,7 +70,7 @@ export async function customerSearchAction(keyword: string) {
   try {
     const response = await fetch(
       `${
-        process.env.HOST_URL
+        process.env.NEXT_PUBLIC_HOST_URL
       }/api/v1/customer/authorized/search?keyword=${encodeURIComponent(
         keyword
       )}`,
@@ -104,7 +104,7 @@ export async function customerGetMoreAction(customerId: string) {
   const token = (await cookies()).get("token")?.value;
   const res = await fetch(
     `${
-      process.env.HOST_URL
+      process.env.NEXT_PUBLIC_HOST_URL
     }/api/v1/customer/authorized/getmore?customerId=${encodeURIComponent(
       customerId
     )}`,
@@ -132,7 +132,7 @@ export async function customerEditAction(
   const token = (await cookies()).get("token")?.value;
   const res = await fetch(
     `${
-      process.env.HOST_URL
+      process.env.NEXT_PUBLIC_HOST_URL
     }/api/v1/customer/authorized/edit?customerId=${encodeURIComponent(
       customerId
     )}`,
@@ -147,6 +147,30 @@ export async function customerEditAction(
         lastName: lastNameE,
         phone: phoneE,
       }),
+    }
+  );
+
+  const data = await res.json();
+  if (!res.ok) {
+    return { success: false, message: data.message };
+  }
+  return { success: true, message: data.message };
+}
+
+export async function customerDeleteAction(customerId: string) {
+  const token = (await cookies()).get("token")?.value;
+  const res = await fetch(
+    `${
+      process.env.NEXT_PUBLIC_HOST_URL
+    }/api/v1/customer/authorized/delete?customerId=${encodeURIComponent(
+      customerId
+    )}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     }
   );
 

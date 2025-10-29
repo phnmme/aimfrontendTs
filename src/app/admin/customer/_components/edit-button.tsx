@@ -93,8 +93,12 @@ export default function EditButton({
             {editing === "firstName" ? (
               <div className="flex items-center gap-2">
                 <Input
+                  id="firstName"
+                  placeholder="ใส่ชื่อจริง"
                   value={firstNameE}
                   onChange={(e) => setFirstName(e.target.value)}
+                  pattern="^[\u0E00-\u0E7F\u0020-\u007E]*$"
+                  title="กรุณาใช้ตัวอักษรภาษาไทยหรืออังกฤษเท่านั้น"
                 />
                 <Button
                   variant="ghost"
@@ -130,8 +134,12 @@ export default function EditButton({
             {editing === "lastName" ? (
               <div className="flex items-center gap-2">
                 <Input
+                  id="lastName"
+                  placeholder="ใส่นามสกุล"
                   value={lastNameE}
                   onChange={(e) => setLastName(e.target.value)}
+                  pattern="^[\u0E00-\u0E7F\u0020-\u007E]*$"
+                  title="กรุณาใช้ตัวอักษรภาษาไทยหรืออังกฤษเท่านั้น"
                 />
                 <Button
                   variant="ghost"
@@ -167,8 +175,12 @@ export default function EditButton({
             {editing === "phone" ? (
               <div className="flex items-center gap-2">
                 <Input
+                  id="phone"
+                  placeholder="ใส่เบอร์โทรศัพท์"
                   value={phoneE}
                   onChange={(e) => setPhone(e.target.value)}
+                  pattern="^0[689]\d{8}$"
+                  title="กรุณากรอกเบอร์โทรศัพท์ที่ถูกต้อง (10 หลัก ขึ้นต้นด้วย 06, 08, หรือ 09)"
                 />
                 <Button
                   variant="ghost"
@@ -203,14 +215,15 @@ export default function EditButton({
         <DialogFooter>
           <DialogClose asChild>
             <Button
-              className="border border-gray-500 text-gray-500 hover:border-blue-500 hover:text-blue-500 hover:bg-aim-primary"
+              variant="outline"
               onClick={closeDialog}
+              className="border border-gray-500 text-gray-500 hover:border-blue-500 hover:text-blue-500 hover:bg-gray-100"
             >
               ยกเลิก
             </Button>
           </DialogClose>
           <Button
-            className="bg-aim-secondary text-white hover:bg-blue-950"
+            className="bg-blue-500 hover:bg-blue-400 hover:text-white border-blue-600"
             onClick={handleSubmit}
             disabled={loading}
           >

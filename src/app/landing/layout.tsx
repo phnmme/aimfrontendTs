@@ -5,10 +5,10 @@ export default function LandingLayout({
 }) {
   return (
     <div>
-      <header className="bg-blue-500 text-white p-4">
+      {/* <header className="bg-blue-500 text-white p-4">
         <h1>Welcome to My App</h1>
-      </header>
-      <main className="p-6">{children}</main>
+      </header> */}
+      <main className="">{children}</main>
     </div>
   );
 }
