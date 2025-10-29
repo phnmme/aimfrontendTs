@@ -79,7 +79,7 @@ export default function MoreButton({ vehicleId }: MoreButtonProps) {
                       className="border border-gray-300 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
                       onClick={() =>
                         window.open(
-                          `${URL}/api/v1/file/authorized/file/${service.pdfName}`,
+                          `${URL}api/v1/file/authorized/file/${service.pdfName}`,
                           "_blank"
                         )
                       }
@@ -94,7 +94,7 @@ export default function MoreButton({ vehicleId }: MoreButtonProps) {
                       className="border border-gray-300 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
                       onClick={() =>
                         window.open(
-                          `${URL}/api/v1/file/authorized/file/${service.imageName}`,
+                          `${URL}api/v1/file/authorized/file/${service.imageName}`,
                           "_blank"
                         )
                       }

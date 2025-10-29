@@ -97,7 +97,7 @@ export function PersonSearch({ onSelect }: PersonSearchProps) {
                       setValue(person.firstName + " " + person.lastName);
                       setOpen(false);
                       setSearch("");
-                      onSelect?.(person); // ส่ง person กลับ parent
+                      onSelect?.(person);
                     }}
                   >
                     {person.firstName} {person.lastName}
