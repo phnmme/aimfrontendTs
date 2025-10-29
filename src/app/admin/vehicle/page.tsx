@@ -1,8 +1,12 @@
 import { requireAuth } from "@/lib/authGuard";
 import TableSearch from "./_components/table-search";
+import { redirect } from "next/navigation";
 
 export default async function VehiclePage() {
-  await requireAuth();
+  const auth = await requireAuth();
+  if (!auth) {
+    return redirect("/landing/auth/login");
+  }
 
   return (
     <main className="w-full p-8">

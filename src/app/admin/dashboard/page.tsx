@@ -8,9 +8,13 @@ import {
   getTotalGraph,
 } from "@/actions/dashborad-action";
 import Recharts from "./_components/recharts";
+import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
-  await requireAuth();
+  const auth = await requireAuth();
+  if (!auth) {
+    return redirect("/landing/auth/login");
+  }
   const summary = await dashboardGetSummaryAction();
   const log = await getLog();
   const totalGraph = await getTotalGraph();
@@ -19,7 +23,7 @@ export default async function DashboardPage() {
     <main className="w-full p-8">
       {/* Header */}
       <header className="mb-8">
-        <h1 className="text-3xl font-extrabold bg-gradient-to-r from-[#c2e0f9] to-[#2e77b3] bg-clip-text text-transparent">
+        <h1 className="text-3xl font-extrabold bg-linear-to-r from-[#c2e0f9] to-[#2e77b3] bg-clip-text text-transparent">
           ยินดีต้อนรับสู่หน้าแดชบอร์ด
         </h1>
         <p className="text-slate-500">ภาพรวมของ AIM-L</p>

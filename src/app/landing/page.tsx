@@ -80,7 +80,7 @@ export default function LandingPage() {
                 {repeatedCards.map((card, idx) => (
                   <div
                     key={idx}
-                    className="relative group  w-[200px] mr-8 h-[200px] overflow-hidden rounded-2xl flex-shrink-0   hover:border-white/30 transition-all duration-300 hover:scale-105"
+                    className="relative group  w-[200px] mr-8 h-[200px] overflow-hidden rounded-2xl shrink-0   hover:border-white/30 transition-all duration-300 hover:scale-105"
                   >
                     <Image
                       src={`${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/file/authorized/file/${card.imgname}`}

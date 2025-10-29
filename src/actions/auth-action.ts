@@ -12,8 +12,6 @@ export async function loginAction(email: string, password: string) {
       body: JSON.stringify({ email, password }),
     }
   );
-  // const text = await res.text();
-  // console.log("Response text:", text);
   const data = await res.json();
   if (!res.ok) {
     return { success: false, message: data.message };
