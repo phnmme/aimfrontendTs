@@ -6,7 +6,7 @@ export async function dashboardGetSummaryAction() {
   const token = (await cookies()).get("token")?.value;
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}
-/api/v1/analysis/authorized/summary`,
+api/v1/analysis/authorized/summary`,
     {
       method: "GET",
       headers: {
@@ -29,7 +29,7 @@ export async function dashboardGetSummaryAction() {
 export async function getLog() {
   const token = (await cookies()).get("token")?.value;
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/analysis/authorized/getlog`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/analysis/authorized/getlog`,
     {
       method: "GET",
       headers: {
@@ -52,7 +52,7 @@ export async function getLog() {
 export async function getTotalGraph() {
   const token = (await cookies()).get("token")?.value;
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/analysis/authorized/totalGraph`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/analysis/authorized/totalGraph`,
     {
       method: "GET",
       headers: {

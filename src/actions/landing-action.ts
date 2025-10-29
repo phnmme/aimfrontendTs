@@ -3,7 +3,7 @@ export async function vehicleSearchGuestAction(keyword: string) {
     const response = await fetch(
       `${
         process.env.NEXT_PUBLIC_HOST_URL
-      }/api/v1/vehicle/guest/search?keyword=${encodeURIComponent(keyword)}`,
+      }api/v1/vehicle/guest/search?keyword=${encodeURIComponent(keyword)}`,
       {
         method: "GET",
       }

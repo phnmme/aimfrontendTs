@@ -11,7 +11,7 @@ export async function vehicleGetAllAction(limit = 10, cursor?: string) {
   const res = await fetch(
     `${
       process.env.NEXT_PUBLIC_HOST_URL
-    }/api/v1/vehicle/authorized/list?${params.toString()}`,
+    }api/v1/vehicle/authorized/list?${params.toString()}`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -42,9 +42,7 @@ export async function vehicleSearchAction(keyword: string) {
     const response = await fetch(
       `${
         process.env.NEXT_PUBLIC_HOST_URL
-      }/api/v1/vehicle/authorized/search?keyword=${encodeURIComponent(
-        keyword
-      )}`,
+      }api/v1/vehicle/authorized/search?keyword=${encodeURIComponent(keyword)}`,
       {
         method: "GET",
         headers: {
@@ -76,7 +74,7 @@ export async function vehicleGetMoreAction(vehicleId: string) {
   const res = await fetch(
     `${
       process.env.NEXT_PUBLIC_HOST_URL
-    }/api/v1/vehicle/authorized/getmore?vehicleId=${encodeURIComponent(
+    }api/v1/vehicle/authorized/getmore?vehicleId=${encodeURIComponent(
       vehicleId
     )}`,
     {
@@ -107,7 +105,7 @@ export async function vehicleCreateAction(
   const token = (await cookies()).get("token")?.value;
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/vehicle/authorized/create`,
+      `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/vehicle/authorized/create`,
       {
         method: "POST",
         headers: {
@@ -152,7 +150,7 @@ export async function vehicleuploadAction(
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/vehicle/authorized/upload`,
+      `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/vehicle/authorized/upload`,
       {
         method: "POST",
         headers: {
