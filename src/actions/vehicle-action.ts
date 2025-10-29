@@ -155,6 +155,7 @@ export async function vehicleuploadAction(
           Authorization: `Bearer ${token}`,
         },
         body: formData,
+        credentials: "include",
       }
     );
 
