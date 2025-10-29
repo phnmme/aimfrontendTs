@@ -26,7 +26,6 @@ export async function loginAction(email: string, password: string) {
 export async function getMe() {
   const token = localStorage.getItem("token");
   const host = process.env.NEXT_PUBLIC_HOST_URL;
-  console.log("Host URL:", host);
   const res = await fetch(`${host}api/v1/auth/authorized/me`, {
     method: "GET",
     headers: {
