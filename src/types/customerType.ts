@@ -23,4 +23,10 @@ interface customerGetMoreType {
   }[];
 }
 
-export type { customerListType, customerGetMoreType };
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export type { customerListType, customerGetMoreType, User };

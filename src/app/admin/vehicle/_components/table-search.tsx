@@ -46,7 +46,6 @@ export default function TableSearch() {
 
   const fetchVehicles = async (cursor?: string) => {
     const res = await vehicleGetAllAction(10, cursor || undefined);
-    console.log(res);
     if (res.success) {
       setVehicles(res.data);
       setNextCursor(res.nextCursor || null);

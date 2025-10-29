@@ -1,86 +1,78 @@
-// TODO: Tags Makers WITH changing colors
+"use client";
 
-'use client';
-import { useState } from "react";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableRow, TableHeader } from "@/components/ui/table";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Bell } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import BadgeCard from "./badge-card";
+import { BadgeCardDate, BadgeCardType } from "./badge-card";
+import { summaryType } from "@/types/dashboradType";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 
-// TODO: ทำ interface ให้เหมาะกับข้อมูล
-interface Activity {
-    vehicle_id: string;
-    vehicle_type: string; // TODO: ควรจะเป็น Enumeration
-    name: string;
-    expired_time: string;   
-}
+export default function CardExpirations({ summary }: { summary: summaryType }) {
+  return (
+    <Card className="w-full border border-sky-700/40 shadow-md">
+      <CardHeader className="pb-2">
+        <div className="flex items-center justify-between">
+          <CardTitle className="flex items-center gap-2 text-xl font-semibold">
+            <Bell className="size-5 text-sky-500" />
+            ใกล้หมดอายุ
+          </CardTitle>
+        </div>
+        <CardDescription className="text-muted-foreground">
+          บริการที่ใกล้หมดอายุในเร็วๆ นี้
+        </CardDescription>
+      </CardHeader>
 
-// MOCKUP
-const mockActivities: Activity[] = [
-    { vehicle_id: "V123", vehicle_type: "พ.ร.บ", name: "นาย ยิ้ม", expired_time: "10 นาทีที่แล้ว" },
-    { vehicle_id: "V124", vehicle_type: "พ.ร.บ", name: "นางสาว ฟ้า", expired_time: "15 นาทีที่แล้ว" },
-    { vehicle_id: "V125", vehicle_type: "พ.ร.บ", name: "นาย สาย", expired_time: "20 นาทีที่แล้ว" },
-    { vehicle_id: "V126", vehicle_type: "พ.ร.บ", name: "นาย ยิ้ม", expired_time: "30 นาทีที่แล้ว" },
-    { vehicle_id: "V127", vehicle_type: "พ.ร.บ", name: "นางสาว ฟ้า", expired_time: "45 นาทีที่แล้ว" },
-    { vehicle_id: "V128", vehicle_type: "พ.ร.บ", name: "นาย สาย", expired_time: "50 นาทีที่แล้ว" },
-];
+      <Separator className="mb-3" />
 
-export default function CardExpirations() {
-    const [page, setPage] = useState<number>(1);
-    // TODO: ทำ get all count สำหรับการทำ paginations
-    const totalPages: number = 5;
+      <CardContent className="p-0">
+        <ScrollArea className="h-96 w-full">
+          <div className="flex flex-col divide-y divide-border/40">
+            {summary.expvehicleInfo.length > 0 ? (
+              summary.expvehicleInfo.map((activity, index) => (
+                <div
+                  key={index}
+                  className="px-4 py-3 hover:bg-slate-800/40 transition-colors"
+                >
+                  <div className="flex flex-col gap-1">
+                    {/* แถวบน: ทะเบียน + ประเภท + วันที่หมดอายุ */}
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-medium truncate max-w-[220px]">
+                          ทะเบียน: {activity.vehicleNumber}
+                        </h3>
+                        <BadgeCardType serviceType={activity.serviceType} />
+                      </div>
+                      <BadgeCardDate endDate={activity.endDate} />
+                    </div>
 
-    // TODO: ทำตัวเรียกข้อมูล ดัก MAX VALUE
+                    <p className="text-sm text-muted-foreground truncate max-w-[220px]">
+                      {activity.customerName}
+                    </p>
 
-    return (
-        <Card className="w-full">
-            <CardHeader>
-                <CardTitle>
-                    <h2 className="flex items-center gap-2 text-xl font-semibold">
-                        <Bell className="size-4" />
-                        ใกล้หมดอายุ
-                    </h2>
-                </CardTitle>
-                <CardDescription className="text-muted-foreground">
-                    บริการที่ใกล้หมดอายุในเร็วๆนี้
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                <Table>
-                    <TableBody>
-                        {mockActivities.map((activity, index) => (
-                            <TableRow 
-                                key={index}
-                                className="flex justify-between space-y-2"
-                            >
-                                <TableCell className="flex flex-col w-full">
-                                    <div className="flex justify-between">
-                                        <div className="flex items-center space-x-2">
-                                            <h3>{`ยานพาหนะ: ${activity.vehicle_id}`}</h3>
-                                            {/* Type */}
-                                            <BadgeCard /> 
-                                        </div>
-                                        <div className="flex items-center space-x-2">
-                                            {/* Date */}
-                                            <BadgeCard />
-                                        </div>
-                                    </div>
-                                    <p className="text-muted-foreground">{activity.name}</p>
-                                    <p className="text-sm text-muted-foreground">{activity.expired_time}</p>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </CardContent>
-            <CardFooter>
-                <Button className="w-full" variant="gradientBorder" size="default">
-                    <Link href="/admin/dashboard" className="buttonn-default"></Link>ดูเพิ่มเติม
-                </Button>
-            </CardFooter>
-
-        </Card>
-    );
+                    <p className="text-xs text-muted-foreground">
+                      {new Date(activity.endDate).toLocaleDateString("th-TH", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="py-6 text-center text-muted-foreground">
+                ไม่มีข้อมูลบริการใกล้หมดอายุ
+              </div>
+            )}
+          </div>
+        </ScrollArea>
+      </CardContent>
+    </Card>
+  );
 }

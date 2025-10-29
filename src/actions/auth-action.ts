@@ -16,8 +16,8 @@ export async function loginAction(email: string, password: string) {
   if (!res.ok) {
     return { success: false, message: data.message };
   }
-
-  (await cookies()).set("token", data.data.token, {
+  const cookieStore = await cookies();
+  cookieStore.set("token", data.data.token, {
     name: "token",
     value: data.data.token,
     httpOnly: true,
@@ -46,6 +46,7 @@ export async function getMe() {
   if (!res.ok) {
     return { success: false, message: data.message };
   }
+
   return {
     success: true,
     message: data.message,
@@ -72,5 +73,5 @@ export async function logoutAction() {
 
   const cookieStore = await cookies();
   cookieStore.delete({ name: "token", path: "/" });
-  redirect("/login");
+  redirect("/landing");
 }

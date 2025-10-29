@@ -43,9 +43,7 @@ export default function LicenseSearchModal() {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    console.log(result);
-  }, [result]);
+
   return (
     <div className="flex justify-center mt-4">
       <Button

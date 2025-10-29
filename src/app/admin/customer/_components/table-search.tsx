@@ -247,7 +247,6 @@ export default function TableSearch() {
         </div>
       </div>
 
-      {/* Pagination */}
       <div className="my-4">
         <PaginationTable
           currentPage={currentPage}

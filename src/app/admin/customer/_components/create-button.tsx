@@ -68,6 +68,8 @@ export default function CreateButton() {
                   placeholder="ใส่ชื่อลูกค้า"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
+                  pattern="^[\u0E00-\u0E7F\u0020-\u007E]*$"
+                  title="กรุณาใช้ตัวอักษรภาษาไทยหรืออังกฤษเท่านั้น"
                   required
                 />
               </div>
@@ -78,6 +80,8 @@ export default function CreateButton() {
                   placeholder="ใส่นามสกุล"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  pattern="^[\u0E00-\u0E7F\u0020-\u007E]*$"
+                  title="กรุณาใช้ตัวอักษรภาษาไทยหรืออังกฤษเท่านั้น"
                   required
                 />
               </div>
@@ -92,6 +96,8 @@ export default function CreateButton() {
                 placeholder="ใส่เลขบัตรประชาชน หรือ รหัสผู้เสียภาษี"
                 value={idCardOrTax}
                 onChange={(e) => setIdCardOrTax(e.target.value)}
+                pattern="^[1-9][0-9]{12}$"
+                title="กรุณากรอกเลข 13 หลัก และต้องไม่ขึ้นต้นด้วย 0"
                 required
               />
             </div>
@@ -103,6 +109,8 @@ export default function CreateButton() {
                 placeholder="ใส่เบอร์โทรศัพท์"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                pattern="^0[689]\d{8}$"
+                title="กรุณากรอกเบอร์โทรศัพท์ที่ถูกต้อง (10 หลัก ขึ้นต้นด้วย 06, 08, หรือ 09)"
                 required
               />
             </div>

@@ -23,8 +23,6 @@ export async function vehicleGetAllAction(limit = 10, cursor?: string) {
 
   const data = await res.json();
 
-  console.log(data);
-
   if (!res.ok) {
     return { success: false, message: data.message };
   }

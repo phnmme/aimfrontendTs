@@ -11,4 +11,24 @@ interface summaryType {
   }[];
 }
 
-export type { summaryType };
+interface logType {
+  id: string;
+  userId: string;
+  actionType: string;
+  actionDetail: string;
+  ipAddress: string;
+  createdAt: string;
+  user: {
+    name: string;
+  };
+}
+
+interface totalGraphType {
+  [year: string]: {
+    month: string;
+    totalCustomers: number;
+    totalServices: number;
+  }[];
+}
+
+export type { summaryType, logType, totalGraphType };

@@ -16,22 +16,21 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    loginAction(email, password)
-      .then((result) => {
-        setMessage(result.message);
+    try {
+      const result = await loginAction(email, password);
+      setMessage(result.message);
 
-        if (result.success) {
-          router.refresh();
-          router.push("/admin/dashboard");
-        }
-      })
-      .catch((error) => {
-        console.error("Login error:", error);
-        setMessage("เกิดข้อผิดพลาดในการเข้าสู่ระบบ");
-      });
+      if (result.success) {
+        router.refresh();
+        router.push("/admin/dashboard");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setMessage("เกิดข้อผิดพลาดในการเข้าสู่ระบบ");
+    }
   };
 
   return (

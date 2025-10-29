@@ -12,12 +12,13 @@ import {
   Car,
   X,
   Menu,
-  ReceiptText,
   Cog,
 } from "lucide-react";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Toaster } from "@/components/ui/sonner";
+import { getMe, logoutAction } from "@/actions/auth-action";
+import { User } from "@/types/customerType";
 
 export default function AdminLayout({
   children,
@@ -25,19 +26,27 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const [close, setClose] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [close] = useState(false);
+  const [isMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 1024);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const [user, setUser] = useState<User | null>(null);
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
+  useEffect(() => {
+    const handleGetMe = async () => {
+      const res = await getMe();
+      if (res.success) {
+        setUser(res.data);
+      }
+    };
+
+    handleGetMe();
+  }, []);
+
+  const handleLogout = async () => {
+    await logoutAction();
+  };
   return (
     <div className="flex min-h-screen bg-aim-background text-white">
       {isMobile && menuOpen && (
@@ -70,11 +79,6 @@ export default function AdminLayout({
               icon: <LayoutDashboard />,
               name: "แดชบอร์ด",
             },
-            {
-              href: "/admin/slip",
-              icon: <ReceiptText />,
-              name: "ใบเสร็จรับเงิน",
-            },
             { href: "/admin/customer", icon: <Users />, name: "จัดการลูกค้า" },
             { href: "/admin/vehicle", icon: <Car />, name: "จัดการรถยนต์" },
             {
@@ -106,11 +110,14 @@ export default function AdminLayout({
               </div>
               {!close && (
                 <div className="flex flex-col">
-                  <p className="links_name">Admin User</p>
+                  <p className="links_name">{user?.name || "Admin User"}</p>
                   <p className="text-slate-500 text-sm">ผู้ดูแลระบบ</p>
                 </div>
               )}
-              <div className="ml-auto hover:bg-[#0f172a] p-2 rounded-lg transition-all cursor-pointer">
+              <div
+                onClick={handleLogout}
+                className="ml-auto hover:bg-[#0f172a] p-2 rounded-lg transition-all cursor-pointer"
+              >
                 <LogOut color="#ffffff" />
               </div>
             </div>
@@ -118,13 +125,11 @@ export default function AdminLayout({
         </ul>
       </div>
 
-      {/* Main content */}
       <div
         className={`flex flex-col flex-1 transition-all duration-500 ${
           !isMobile ? (close ? "ml-[78px]" : "ml-[250px]") : ""
         }`}
       >
-        {/* Navbar */}
         <div className="shadow-md bg-aim-navbar-top w-full z-40 fixed p-4 flex items-center gap-4 print:hidden">
           {isMobile ? (
             <button
@@ -143,7 +148,6 @@ export default function AdminLayout({
           </div>
         </div>
 
-        {/* Page content */}
         <div className="mt-20 px-4 ">{children}</div>
         <Toaster />
       </div>

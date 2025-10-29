@@ -63,6 +63,9 @@ export default function CreateButton() {
               <Input
                 id="firstName"
                 value={selectedPerson?.firstName || ""}
+                placeholder="ใส่ชื่อจริง"
+                pattern="^[\u0E00-\u0E7F\u0020-\u007E]*$"
+                title="กรุณาใช้ตัวอักษรภาษาไทยหรืออังกฤษเท่านั้น"
                 disabled
               />
             </div>
@@ -71,6 +74,9 @@ export default function CreateButton() {
               <Input
                 id="lastName"
                 value={selectedPerson?.lastName || ""}
+                placeholder="ใส่นามสกุล"
+                pattern="^[\u0E00-\u0E7F\u0020-\u007E]*$"
+                title="กรุณาใช้ตัวอักษรภาษาไทยหรืออังกฤษเท่านั้น"
                 disabled
               />
             </div>
@@ -82,6 +88,9 @@ export default function CreateButton() {
               placeholder="ใส่ทะเบียนรถ"
               value={vehicleNumber}
               onChange={(e) => setVehicleNumber(e.target.value)}
+              pattern="^[\u0E00-\u0E7F]+-[0-9]+$"
+              title="กรุณาใช้ตัวอักษรภาษาไทย คั่นด้วย - และตามด้วยตัวเลขเท่านั้น"
+              required
             />
           </div>
         </div>

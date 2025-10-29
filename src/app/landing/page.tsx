@@ -82,15 +82,12 @@ export default function LandingPage() {
                     key={idx}
                     className="relative group  w-[200px] mr-8 h-[200px] overflow-hidden rounded-2xl flex-shrink-0   hover:border-white/30 transition-all duration-300 hover:scale-105"
                   >
-                    {/* รูปภาพ */}
                     <Image
                       src={`${process.env.NEXT_PUBLIC_HOST_URL}/api/v1/file/authorized/file/${card.imgname}`}
                       alt={card.title}
                       fill
                       className="object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110"
                     />
-
-                    {/* overlay สีดำโปร่งใส แต่ไม่ blur */}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center text-center px-4 rounded-2xl">
                       <h3 className="text-white text-lg font-semibold drop-shadow-md">
                         {card.title}

@@ -1,25 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { dashboardGetSummaryAction } from "@/actions/dashborad-action";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { summaryType } from "@/types/dashboradType";
 import { CarFront, TriangleAlert, Users } from "lucide-react";
 
-export default function CardSummarized() {
-  const [summary, setSummary] = useState<summaryType | null>(null);
-
-  const fetchSummary = async () => {
-    const res = await dashboardGetSummaryAction();
-    if (res.success) {
-      setSummary(res.data);
-    }
-  };
-
-  useEffect(() => {
-    fetchSummary();
-  }, []);
-
+export default function CardSummarized({ summary }: { summary: summaryType }) {
   const cardData = [
     {
       title: "ลูกค้าทั้งหมด",
