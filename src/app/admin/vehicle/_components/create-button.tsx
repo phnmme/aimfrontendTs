@@ -88,8 +88,8 @@ export default function CreateButton() {
               placeholder="ใส่ทะเบียนรถ"
               value={vehicleNumber}
               onChange={(e) => setVehicleNumber(e.target.value)}
-              pattern="^[\u0E00-\u0E7F]+-[0-9]+$"
-              title="กรุณาใช้ตัวอักษรภาษาไทย คั่นด้วย - และตามด้วยตัวเลขเท่านั้น"
+              pattern="^[\u0E00-\u0E7F]+[0-9]+$"
+              title="กรุณาใช้ตัวอักษรภาษาไทยและตามด้วยตัวเลขเท่านั้น"
               required
             />
           </div>

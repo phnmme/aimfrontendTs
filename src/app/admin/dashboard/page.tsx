@@ -12,6 +12,7 @@ import Recharts from "./_components/recharts";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { logType, summaryType, YearlyData } from "@/types/dashboradType";
+import { validateTokenAction } from "@/actions/auth-action";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -20,16 +21,18 @@ export default function DashboardPage() {
   const [totalGraph, setTotalGraph] = useState<YearlyData | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      router.push("/landing/auth/login");
-    }
+    const validateToken = async () => {
+      const tokenValidation = await validateTokenAction();
+      if (!tokenValidation.success) {
+        router.push("/landing/auth/login");
+      }
+    };
+    validateToken();
 
     const fetchData = async () => {
       const summaryData = await dashboardGetSummaryAction();
       const logData = await getLog();
       const totalGraphData = await getTotalGraph();
-      console.log("Total Graph Data:", totalGraphData);
 
       setSummary(summaryData.data);
       setLog(logData.data);

@@ -5,17 +5,20 @@ import { useRouter } from "next/navigation";
 import LineNotificationPanel from "./_components/lineNotificationPanel";
 import { MyData } from "@/types/configsite";
 import { getSetting } from "@/actions/config-action";
-import { se } from "date-fns/locale";
+import { validateTokenAction } from "@/actions/auth-action";
 
 export default function ConfigSitePage() {
   const router = useRouter();
 
   const [data, setData] = useState<MyData | null>(null);
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      router.push("/landing/auth/login");
-    }
+    const validateToken = async () => {
+      const tokenValidation = await validateTokenAction();
+      if (!tokenValidation.success) {
+        router.push("/landing/auth/login");
+      }
+    };
+    validateToken();
 
     const fetchData = async () => {
       const data = await getSetting();

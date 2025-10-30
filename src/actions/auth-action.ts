@@ -66,3 +66,22 @@ export async function logoutAction() {
 
   redirect("/landing");
 }
+
+export async function validateTokenAction() {
+  const token = localStorage.getItem("token");
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/auth/authorized/validateToken`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  if (res.status === 401) {
+    localStorage.removeItem("token");
+    redirect("/landing");
+  }
+  return { success: true, message: "Token ยังไม่หมดอายุ" };
+}
