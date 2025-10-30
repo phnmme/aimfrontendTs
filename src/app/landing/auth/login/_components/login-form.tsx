@@ -18,6 +18,17 @@ export default function LoginForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      setMessage("กรุณากรอกอีเมลที่ถูกต้อง");
+      return;
+    }
+
+    if (!password || password.length < 4) {
+      setMessage("รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร");
+      return;
+    }
+
     const result = await loginAction(email, password);
 
     setMessage(result.message);

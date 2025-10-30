@@ -83,6 +83,10 @@ export default function TableSearch() {
       .catch((error) => console.error("เกิดข้อผิดพลาด:", error));
   };
 
+  useEffect(() => {
+    console.log("Vehicles updated:", vehicles);
+  }, [vehicles]);
+
   const handlePageChange = (page: number) => {
     if (page > currentPage && nextCursor) {
       setHistoryCursors((prev) => [...prev, cursor || ""]);
@@ -135,17 +139,16 @@ export default function TableSearch() {
 
       <article
         className="
-          border bg-card rounded-lg 
-          p-2 sm:p-4 md:p-6 
-          bg-aim-navbar-top
-          overflow-x-scroll sm:overflow-x-auto
-          scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent
-          -mx-2 sm:mx-0
-        "
+    border bg-card rounded-lg 
+    p-2 sm:p-4 md:p-6 
+    bg-aim-navbar-top
+    overflow-hidden
+    -mx-2 sm:mx-0
+  "
       >
-        <div className="min-w-[650px] sm:min-w-full">
+        <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent">
           <Table
-            className="w-full text-xs sm:text-sm md:text-base"
+            className="w-full text-xs sm:text-sm md:text-base min-w-[650px]"
             aria-labelledby="customer-table-section"
           >
             <caption className="sr-only" id="customer-table-section">
@@ -167,8 +170,7 @@ export default function TableSearch() {
                 </TableHead>
               </TableRow>
             </TableHeader>
-
-            <TableBody className="">
+            <TableBody>
               {vehicles && vehicles.length > 0 ? (
                 vehicles.map((vehicle) => (
                   <TableRow
@@ -184,7 +186,7 @@ export default function TableSearch() {
                     <TableCell className="text-center text-xs sm:text-sm whitespace-nowrap">
                       {vehicle.phone}
                     </TableCell>
-                    <TableCell className="text-center">
+                    <TableCell className="text-center whitespace-nowrap">
                       <Drawer>
                         <DrawerTrigger asChild>
                           <Button
@@ -196,7 +198,6 @@ export default function TableSearch() {
                             จัดการ
                           </Button>
                         </DrawerTrigger>
-
                         <DrawerContent
                           className={`${
                             isMobile
@@ -214,7 +215,6 @@ export default function TableSearch() {
                                 {selectedVehicle?.lastName}
                               </DrawerDescription>
                             </DrawerHeader>
-
                             <section className="p-0 sm:p-4 flex flex-col gap-2 sm:gap-3">
                               <MoreButton
                                 vehicleId={selectedVehicle?.vehicleId ?? ""}
@@ -226,7 +226,6 @@ export default function TableSearch() {
                                 vehicleId={selectedVehicle?.vehicleId ?? ""}
                               />
                             </section>
-
                             <DrawerFooter className="px-0 sm:px-6 pb-4 sm:pb-6">
                               <DrawerClose asChild>
                                 <Button

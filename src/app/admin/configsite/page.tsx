@@ -28,7 +28,7 @@ export default function ConfigSitePage() {
   }, [router]);
 
   return (
-    <main className="w-full p-8">
+    <main className="w-full md:p-8">
       <header className="mb-6">
         <h1 className="font-extrabold bg-linear-to-r from-[#c2e0f9] to-[#2e77b3] bg-clip-text text-transparent">
           ยินดีต้อนรับสู่หน้าจัดการตั้งระบบ Line
