@@ -15,7 +15,10 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { MyData, Service } from "@/types/configsite";
-import { updateSettingAction } from "@/actions/config-action";
+import {
+  sendLineNotification,
+  updateSettingAction,
+} from "@/actions/config-action";
 import { Send } from "lucide-react";
 
 export default function LineNotificationPanel({ data }: { data: MyData }) {
@@ -39,20 +42,17 @@ export default function LineNotificationPanel({ data }: { data: MyData }) {
     try {
       setLoading((prev) => ({ ...prev, [service.id]: true }));
 
-      // เรียก API ส่ง LINE
-      const res = await fetch("/api/line/send-notification", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          customerId: data.customerId,
-          vehicleNumber: service.vehicle.vehicleNumber,
-          serviceType: service.serviceType,
-          endDate: service.endDate,
-          serviceId: service.id,
-        }),
-      });
+      const res = await sendLineNotification(
+        service.vehicle.customerId,
+        service.vehicle.vehicleNumber,
+        service.serviceType,
+        service.endDate,
+        service.id
+      );
 
-      if (!res.ok) throw new Error("ส่งไม่สำเร็จ");
+      if (!res.success) {
+        throw new Error(res.message);
+      }
 
       toast.success(
         `📨 ส่งแจ้งเตือนสำหรับ ${service.vehicle.vehicleNumber} สำเร็จ`
@@ -76,7 +76,6 @@ export default function LineNotificationPanel({ data }: { data: MyData }) {
         selectedServices.has(s.id)
       );
 
-      // ส่งทีละรายการ
       for (const service of selectedList) {
         await handleSendSingle(service);
       }

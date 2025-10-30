@@ -3,14 +3,18 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import TableSearch from "./_components/table-search";
+import { validateTokenAction } from "@/actions/auth-action";
 
 export default function VehiclePage() {
   const router = useRouter();
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      router.push("/landing/auth/login");
-    }
+    const validateToken = async () => {
+      const tokenValidation = await validateTokenAction();
+      if (!tokenValidation.success) {
+        router.push("/landing/auth/login");
+      }
+    };
+    validateToken();
   }, [router]);
 
   return (

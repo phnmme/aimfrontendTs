@@ -13,6 +13,7 @@ import {
   X,
   Menu,
   Cog,
+  Phone,
 } from "lucide-react";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
@@ -81,14 +82,13 @@ export default function AdminLayout({
     },
     {
       href: "/admin/configsite",
-      icon: <Cog />,
-      name: "ตั้งค่าระบบ",
+      icon: <Phone />,
+      name: "ไลน์แจ้งเตือน",
     },
   ];
 
   return (
     <div className="flex min-h-screen bg-aim-background text-white">
-      {/* Overlay สำหรับ Mobile */}
       {isMobile && menuOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 print:hidden"
@@ -96,7 +96,6 @@ export default function AdminLayout({
         />
       )}
 
-      {/* Sidebar */}
       <div
         className={`sidebar print:hidden
         ${isMobile ? (menuOpen ? "translate-x-0" : "") : ""}

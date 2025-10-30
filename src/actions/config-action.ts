@@ -44,14 +44,20 @@ export async function sendLineNotification(
 ) {
   const token = localStorage.getItem("token");
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/configsite/authorized/sendNotification`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}api/v1/line/authorized/sendNotification`,
     {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ customerId, vehicleNumber, serviceType, endDate }),
+      body: JSON.stringify({
+        customerId,
+        vehicleNumber,
+        serviceType,
+        endDate,
+        serviceId,
+      }),
     }
   );
   const data = await res.json();

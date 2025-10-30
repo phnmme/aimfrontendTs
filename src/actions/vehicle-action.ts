@@ -178,7 +178,7 @@ export async function vehicleDeleteAction(vehicleId: string) {
     const response = await fetch(
       `${
         process.env.NEXT_PUBLIC_HOST_URL
-      }/api/v1/vehicle/authorized/delete?vehicleId=${encodeURIComponent(
+      }api/v1/vehicle/authorized/delete?vehicleId=${encodeURIComponent(
         vehicleId
       )}`,
       {
