@@ -136,6 +136,7 @@ export default function EditButton({
                 <Input
                   id="lastName"
                   placeholder="ใส่นามสกุล"
+                  type="text"
                   value={lastNameE}
                   onChange={(e) => setLastName(e.target.value)}
                   pattern="^[\u0E00-\u0E7F\u0020-\u007E]*$"

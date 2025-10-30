@@ -19,10 +19,6 @@ export default function ContactBox() {
       className="relative max-w-5xl mx-auto p-6 md:p-10 rounded-3xl border border-white/20 backdrop-blur-lg shadow-lg
                  bg-white/10 text-gray-800"
     >
-      {/* glow layer */}
-      {/* <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-blue-100/30 via-indigo-100/20 to-transparent blur-md"></div> */}
-
-      {/* หัวข้อ */}
       <div className="text-center mb-10">
         <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full mb-4 shadow-md">
           <Phone className="w-8 h-8 text-white" />
@@ -31,11 +27,8 @@ export default function ContactBox() {
         <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mx-auto"></div>
       </div>
 
-      {/* Layout 2 คอลัมน์ */}
       <div className="flex flex-col md:flex-row gap-10">
-        {/* ซ้าย: เบอร์ + ไลน์ */}
         <div className="flex-1 space-y-6">
-          {/* เบอร์หลัก */}
           <div className="group transition-transform duration-200 hover:scale-[1.02]">
             <div className="flex items-center gap-4 p-4 rounded-xl border border-white/30 bg-white/30 backdrop-blur-md hover:border-blue-300/70 shadow-sm transition-all duration-200">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-indigo-400 rounded-full flex items-center justify-center">

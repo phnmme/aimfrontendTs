@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FileDown, FilePlus, Upload } from "lucide-react";
+import { FileDown, FilePlus } from "lucide-react";
 import { vehicleuploadAction } from "@/actions/vehicle-action";
 import { toast } from "sonner";
 
