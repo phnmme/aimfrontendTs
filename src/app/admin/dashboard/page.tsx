@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { logType, summaryType, YearlyData } from "@/types/dashboradType";
 import { validateTokenAction } from "@/actions/auth-action";
+import MonthlyStatsTable from "./_components/table";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -33,6 +34,7 @@ export default function DashboardPage() {
       const summaryData = await dashboardGetSummaryAction();
       const logData = await getLog();
       const totalGraphData = await getTotalGraph();
+      console.log("Total Graph Data:", totalGraphData);
 
       setSummary(summaryData.data);
       setLog(logData.data);
@@ -72,6 +74,12 @@ export default function DashboardPage() {
             Graph Section
           </h2>
           {totalGraph && <Recharts data={totalGraph} />}
+        </section>
+        <section aria-labelledby="table-section">
+          <h2 id="table-section" className="sr-only">
+            Table Section
+          </h2>
+          {totalGraph && <MonthlyStatsTable data={totalGraph} />}
         </section>
       </main>
     </>
