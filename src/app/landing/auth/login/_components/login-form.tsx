@@ -25,7 +25,7 @@ export default function LoginForm() {
     }
 
     if (!password || password.length < 4) {
-      setMessage("รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร");
+      setMessage("รหัสผ่านต้องมีความยาวอย่างน้อย 4 ตัวอักษร");
       return;
     }
 
@@ -60,6 +60,7 @@ export default function LoginForm() {
               placeholder="name@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
               required
             />
           </div>
@@ -73,6 +74,7 @@ export default function LoginForm() {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                pattern="^[a-zA-Z0-9]+$"
                 required
               />
               <button
@@ -102,7 +104,7 @@ export default function LoginForm() {
           )}
         </form>
 
-        <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
+        {/* <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
           ยังไม่มีบัญชี?{" "}
           <a
             href="/register"
@@ -110,7 +112,7 @@ export default function LoginForm() {
           >
             สมัครสมาชิก
           </a>
-        </div>
+        </div> */}
       </CardContent>
     </Card>
   );
