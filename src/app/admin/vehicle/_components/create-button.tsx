@@ -62,6 +62,7 @@ export default function CreateButton() {
               <Label htmlFor="firstName">ชื่อลูกค้า</Label>
               <Input
                 id="firstName"
+                type="text"
                 value={selectedPerson?.firstName || ""}
                 placeholder="ใส่ชื่อจริง"
                 pattern="^[\u0E00-\u0E7F\u0020-\u007E]*$"
